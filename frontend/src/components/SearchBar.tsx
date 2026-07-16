@@ -45,7 +45,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ask a question about Guidely policies, onboarding, tools..."
+              placeholder="Ask a question about Gem policies, onboarding, tools..."
               className="w-full bg-slate-950/50 border border-white/[0.05] text-white placeholder-slate-500 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-violet-accent/80 focus:ring-1 focus:ring-violet-accent/40 transition-all duration-200 text-sm font-semibold"
             />
           </div>

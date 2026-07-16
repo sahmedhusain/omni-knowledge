@@ -49,7 +49,7 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
           <div className="flex items-center gap-2">
             <CheckCircle2 size={16} className="text-violet-400" />
             <span className="font-heading font-extrabold text-xs uppercase tracking-wider text-slate-300">
-              Guidely Copilot Response
+              Gem Copilot Response
             </span>
           </div>
           

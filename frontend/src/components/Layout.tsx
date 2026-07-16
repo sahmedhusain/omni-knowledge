@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, FileText, BarChart2, Activity, Database, Sparkles } from 'lucide-react';
+import { Search, FileText, BarChart2, Activity, Database, Gem } from 'lucide-react';
 import { useMetrics } from '../hooks/useMetrics';
 
 interface LayoutProps {
@@ -40,11 +40,11 @@ export const Layout: React.FC<LayoutProps> = ({
           {/* Brand Logo */}
           <div className="flex items-center gap-3 mb-10 px-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-violet-500/25">
-              <Sparkles size={18} className="text-white" />
+              <Gem size={18} className="text-white" />
             </div>
             <div>
               <h1 className="font-heading text-base font-extrabold tracking-wider text-white leading-none">
-                Guidely
+                Gem
               </h1>
               <span className="text-[9px] text-slate-500 font-extrabold uppercase tracking-widest block mt-1">
                 Internal Copilot
