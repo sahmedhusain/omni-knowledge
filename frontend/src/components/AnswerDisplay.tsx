@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { SearchResponse } from '../types/api';
-import { Zap, Clock, FileText, CheckCircle2, ChevronRight } from 'lucide-react';
+import { Zap, Clock, FileText, CheckCircle2, ChevronDown } from 'lucide-react';
 import GlassCard from './GlassCard';
 
 interface AnswerDisplayProps {
@@ -12,8 +12,6 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
 
   const { answer, sources, latency_ms, cache_hit } = response;
 
-  // Format citations inside answer string
-  // Matches [1], [2], etc., and wraps them in inline highlights
   const renderFormattedAnswer = (text: string) => {
     const parts = text.split(/(\[\d+\])/g);
     return parts.map((part, i) => {
@@ -25,8 +23,10 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
           <button
             key={i}
             onClick={() => exists && setSelectedSource(sourceIndex)}
-            className={`mx-0.5 inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold rounded bg-violet-600/30 border border-violet-500/50 hover:bg-violet-600 hover:border-violet-400 hover:text-white text-violet-300 align-super transition-all duration-150 ${
-              selectedSource === sourceIndex ? 'ring-2 ring-violet-400 bg-violet-600 text-white' : ''
+            className={`mx-1 inline-flex items-center justify-center w-5 h-5 text-[9px] font-black rounded-md transition-all duration-150 align-baseline ${
+              selectedSource === sourceIndex 
+                ? 'bg-violet-500 text-white shadow-lg shadow-violet-500/20' 
+                : 'bg-white/[0.04] border border-white/[0.06] text-violet-400 hover:bg-violet-600 hover:text-white'
             }`}
             title={exists ? `Source: ${sources[sourceIndex].filename}` : 'Source'}
           >
@@ -39,89 +39,93 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Answer Panel */}
-      <GlassCard className="p-6 relative overflow-hidden border border-slate-800/80">
-        {/* Glow corner */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 blur-[100px] pointer-events-none" />
-
-        {/* Title */}
-        <div className="flex justify-between items-center mb-4 pb-3 border-b border-slate-800/50">
+    <div className="flex flex-col gap-6 animate-fade-in text-left">
+      {/* Answer Block */}
+      <GlassCard className="p-6 relative border-white/[0.04] shadow-2xl">
+        <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-violet-500/5 to-cyan-500/5 blur-[80px] pointer-events-none" />
+        
+        {/* Metric metadata bar */}
+        <div className="flex justify-between items-center mb-5 pb-3.5 border-b border-white/[0.03]">
           <div className="flex items-center gap-2">
             <CheckCircle2 size={16} className="text-violet-400" />
-            <span className="font-heading font-bold text-sm tracking-wide uppercase text-slate-300">
-              Guidely Assistant Answer
+            <span className="font-heading font-extrabold text-xs uppercase tracking-wider text-slate-300">
+              Guidely Copilot Response
             </span>
           </div>
           
-          {/* Latency and Cache Badges */}
-          <div className="flex items-center gap-3 text-xs font-semibold">
+          <div className="flex items-center gap-2.5 text-[10px] font-bold">
             {cache_hit && (
-              <span className="flex items-center gap-1 text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/25">
-                <Zap size={11} />
+              <span className="flex items-center gap-1 text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/10 uppercase tracking-wide">
+                <Zap size={10} />
                 Cached Vector
               </span>
             )}
-            <span className="flex items-center gap-1 text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded-full border border-slate-700/50">
-              <Clock size={11} />
-              {(latency_ms / 1000).toFixed(2)}s
+            <span className="flex items-center gap-1 text-slate-400 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded">
+              <Clock size={10} />
+              {(latency_ms / 1000).toFixed(2)}s Latency
             </span>
           </div>
         </div>
 
-        {/* Text Answer */}
-        <div className="text-slate-100 font-medium leading-relaxed text-left whitespace-pre-line text-sm md:text-base">
+        {/* Formatted Answer Body */}
+        <div className="text-slate-100 font-medium leading-relaxed text-[15px] whitespace-pre-line tracking-wide">
           {renderFormattedAnswer(answer)}
         </div>
       </GlassCard>
 
-      {/* Citations and Sources Panel */}
+      {/* Citations Grid */}
       <div>
-        <p className="text-xs font-semibold text-slate-500 mb-3 tracking-wider uppercase px-1">
-          Source Citations
+        <p className="text-[10px] font-bold text-slate-500 mb-3.5 tracking-wider uppercase px-1">
+          Source Documents Referenced
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <div className="grid grid-cols-1 gap-4">
           {sources.map((src, idx) => {
             const isSelected = selectedSource === idx;
             return (
               <GlassCard
                 key={idx}
                 onClick={() => setSelectedSource(isSelected ? null : idx)}
-                className={`p-4 transition-all duration-300 text-left border relative overflow-hidden flex flex-col justify-between ${
+                className={`p-5 transition-all duration-300 border flex flex-col gap-3 relative overflow-hidden ${
                   isSelected
-                    ? 'border-violet-500/70 bg-violet-950/20 shadow-lg shadow-violet-500/5 ring-1 ring-violet-500/30'
-                    : 'border-slate-800/80 hover:border-slate-700'
+                    ? 'border-violet-500/50 bg-violet-950/10 shadow-lg shadow-violet-500/5'
+                    : 'border-white/[0.04] hover:border-white/[0.08]'
                 }`}
               >
-                <div>
-                  <div className="flex justify-between items-start mb-2.5">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 uppercase tracking-wide">
-                      Source [{idx + 1}]
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-500">
-                      Score: {src.score.toFixed(3)}
-                    </span>
+                <div className="flex flex-row justify-between items-center w-full">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-black font-heading border transition-colors ${
+                      isSelected 
+                        ? 'bg-violet-500 border-violet-400 text-white' 
+                        : 'bg-white/[0.02] border-white/[0.06] text-slate-400'
+                    }`}>
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <h4 className="font-heading font-extrabold text-sm text-slate-200 flex items-center gap-2">
+                        <FileText size={14} className="text-violet-400" />
+                        {src.filename}
+                      </h4>
+                      {src.tag && (
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/10 uppercase tracking-wide inline-block mt-0.5">
+                          {src.tag}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <h4 className="font-heading font-bold text-sm text-slate-200 mb-1 flex items-center gap-1.5 truncate">
-                    <FileText size={14} className="text-violet-400 flex-shrink-0" />
-                    {src.filename}
-                  </h4>
-                  {src.tag && (
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-violet-600/10 text-violet-400 border border-violet-500/10 uppercase tracking-wider">
-                      {src.tag}
+
+                  <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-mono text-slate-500 font-bold">
+                      Relevance L2: {src.score.toFixed(3)}
                     </span>
-                  )}
-                </div>
-                
-                <div className="mt-4 flex items-center justify-between text-xs font-semibold text-violet-400 hover:text-violet-300">
-                  <span>View text segment</span>
-                  <ChevronRight size={14} className={`transform transition-transform ${isSelected ? 'rotate-90' : ''}`} />
+                    <ChevronDown size={16} className={`text-slate-400 transform transition-transform duration-200 ${isSelected ? 'rotate-180 text-violet-400' : ''}`} />
+                  </div>
                 </div>
 
-                {/* Expanded Snippet */}
+                {/* Snippet expand with slide down effect */}
                 {isSelected && (
-                  <div className="col-span-full mt-4 pt-3 border-t border-violet-500/20 w-full animate-fadeIn">
-                    <p className="text-xs font-mono text-slate-400 bg-slate-950/60 p-3 rounded-lg border border-slate-900 leading-normal max-h-40 overflow-y-auto">
+                  <div className="mt-2 pt-3.5 border-t border-white/[0.04] w-full animate-fade-in">
+                    <p className="text-xs font-mono font-medium text-slate-300 bg-slate-950/80 p-4 rounded-xl border border-white/[0.03] leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-56 overflow-y-auto">
                       {src.content}
                     </p>
                   </div>

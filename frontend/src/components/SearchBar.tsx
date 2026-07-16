@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Loader2 } from 'lucide-react';
+import { Search, Loader2, Sparkles, History } from 'lucide-react';
 import GlassCard from './GlassCard';
 
 interface SearchBarProps {
@@ -28,51 +28,57 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const suggestions = [
-    'What are the core hours?',
-    'Meals reimbursement limits',
-    'How do I setup developer environment?',
+    'What are the core collaboration hours?',
+    'What is the daily reimbursement limit for meals?',
+    'Steps to configure the developer environment',
   ];
 
   return (
-    <div className="flex flex-col gap-4">
-      <GlassCard className="p-4">
-        <form onSubmit={handleSubmit} className="flex gap-3 items-center">
+    <div className="flex flex-col gap-4 animate-fade-in">
+      <GlassCard className="p-5 border-white/[0.04] shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-violet-500/25 to-transparent" />
+        
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ask anything about Guidely policies, guidelines, onboarding..."
-              className="w-full bg-slate-950/40 border border-slate-800 text-slate-100 placeholder-slate-500 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-violet-500 focus:shadow-md focus:shadow-violet-500/10 transition-all duration-200"
+              placeholder="Ask a question (e.g. 'What are core hours?' or 'Expense reimbursements?')"
+              className="w-full bg-slate-950/50 border border-white/[0.06] text-white placeholder-slate-500 rounded-xl py-3.5 pl-12 pr-4 outline-none focus:border-violet-500/80 focus:shadow-lg focus:shadow-violet-500/5 transition-all duration-200 text-sm font-semibold"
             />
           </div>
           <button
             type="submit"
             disabled={loading || !query.trim()}
-            className="btn-primary flex items-center justify-center gap-2 h-12 px-6 rounded-xl text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary flex items-center justify-center gap-2 h-[46px] px-6 rounded-xl text-xs uppercase tracking-wider font-extrabold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
-              <Loader2 size={16} className="animate-spin" />
+              <Loader2 size={16} className="animate-spin text-white" />
             ) : (
-              'Submit'
+              <>
+                <Sparkles size={14} />
+                Ask Assistant
+              </>
             )}
           </button>
         </form>
       </GlassCard>
 
-      {/* Suggested / Common Questions */}
+      {/* Suggested Questions */}
       {history.length === 0 && (
-        <div className="px-2">
-          <p className="text-xs font-semibold text-slate-500 mb-2 tracking-wider uppercase">
-            Suggested Queries
+        <div className="px-1.5">
+          <p className="text-[10px] font-bold text-slate-500 mb-2 tracking-wider uppercase flex items-center gap-1.5">
+            <Sparkles size={11} className="text-violet-400" />
+            Suggested Questions
           </p>
           <div className="flex flex-wrap gap-2">
             {suggestions.map((s) => (
               <button
                 key={s}
                 onClick={() => selectShortcut(s)}
-                className="text-xs font-semibold px-3.5 py-2 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-150"
+                className="text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-white/[0.01] border border-white/[0.03] hover:border-violet-500/30 hover:bg-violet-600/[0.03] text-slate-400 hover:text-violet-200 transition-all duration-150 text-left"
               >
                 {s}
               </button>
@@ -83,16 +89,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Search History Shortcuts */}
       {history.length > 0 && (
-        <div className="px-2">
-          <p className="text-xs font-semibold text-slate-500 mb-2 tracking-wider uppercase">
-            Recent Questions
+        <div className="px-1.5">
+          <p className="text-[10px] font-bold text-slate-500 mb-2 tracking-wider uppercase flex items-center gap-1.5">
+            <History size={11} className="text-slate-500" />
+            Recent Queries
           </p>
           <div className="flex flex-wrap gap-2">
-            {history.slice(0, 5).map((h) => (
+            {history.slice(0, 4).map((h) => (
               <button
                 key={h}
                 onClick={() => selectShortcut(h)}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900/40 border border-slate-800/60 text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-150"
+                className="text-xs font-semibold px-3 py-2 rounded-lg bg-white/[0.01] border border-white/[0.02] hover:border-slate-700 text-slate-400 hover:text-slate-200 transition-all duration-150 text-left truncate max-w-xs"
               >
                 {h}
               </button>
