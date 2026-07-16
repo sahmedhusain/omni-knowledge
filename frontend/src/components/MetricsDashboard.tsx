@@ -21,20 +21,20 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
   };
 
   const getHealthGrade = (latencyMs: number, cacheRate: number) => {
-    if (latencyMs < 1200 && cacheRate > 0.85) return { grade: 'A+', color: 'text-violet-400' };
-    if (latencyMs < 2000 && cacheRate > 0.70) return { grade: 'A', color: 'text-emerald-400' };
-    if (latencyMs < 3000 && cacheRate > 0.50) return { grade: 'B', color: 'text-amber-400' };
-    return { grade: 'C', color: 'text-rose-400' };
+    if (latencyMs < 1200 && cacheRate > 0.85) return { grade: 'A+', color: 'text-violet-accent' };
+    if (latencyMs < 2000 && cacheRate > 0.70) return { grade: 'A', color: 'text-emerald-accent' };
+    if (latencyMs < 3000 && cacheRate > 0.50) return { grade: 'B', color: 'text-amber-500' };
+    return { grade: 'C', color: 'text-rose-accent' };
   };
 
   const status = getHealthGrade(latency.median_ms, embedding_cache.hit_rate);
 
   return (
-    <div className="flex flex-col gap-6 text-left animate-fade-in">
-      {/* Overview stats cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Core grade stats */}
-        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
+    <div className="flex flex-col gap-6 text-left animate-fade-in w-full max-w-4xl mx-auto">
+      {/* Overview Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Core grade */}
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04] bg-white/[0.01]">
           <div>
             <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Performance Grade
@@ -43,13 +43,13 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
               {status.grade}
             </h3>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-violet-600/[0.05] border border-violet-500/10 flex items-center justify-center">
-            <Award size={22} className="text-violet-400" />
+          <div className="w-11 h-11 rounded-xl bg-violet-accent/5 border border-violet-accent/10 flex items-center justify-center">
+            <Award size={20} className="text-violet-accent" />
           </div>
         </GlassCard>
 
         {/* Total Documents */}
-        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04] bg-white/[0.01]">
           <div>
             <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Indexed Documents
@@ -58,13 +58,13 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
               {counts.docs}
             </h3>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
-            <FileText size={22} className="text-slate-400" />
+          <div className="w-11 h-11 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
+            <FileText size={20} className="text-slate-400" />
           </div>
         </GlassCard>
 
-        {/* Vector chunks */}
-        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
+        {/* Vector segments */}
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04] bg-white/[0.01]">
           <div>
             <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Vector Segments
@@ -73,13 +73,13 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
               {counts.chunks}
             </h3>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
-            <Database size={22} className="text-slate-400" />
+          <div className="w-11 h-11 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
+            <Database size={20} className="text-slate-400" />
           </div>
         </GlassCard>
 
-        {/* Total served requests */}
-        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
+        {/* Total queries served */}
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04] bg-white/[0.01]">
           <div>
             <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Queries Served
@@ -88,18 +88,18 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
               {counts.queries}
             </h3>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
-            <Activity size={22} className="text-slate-400" />
+          <div className="w-11 h-11 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
+            <Activity size={20} className="text-slate-400" />
           </div>
         </GlassCard>
       </div>
 
       {/* Latency and Caches */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Latency Distribution */}
-        <GlassCard className="p-6 border-white/[0.04]">
+        {/* Latency stats */}
+        <GlassCard className="p-6 border-white/[0.04] bg-white/[0.01]">
           <h3 className="font-heading font-extrabold text-xs text-slate-400 uppercase tracking-wider mb-5 flex items-center gap-2">
-            <Clock size={14} className="text-violet-400" />
+            <Clock size={14} className="text-violet-accent" />
             Query Response Latency
           </h3>
           
@@ -108,37 +108,37 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
             <div>
               <div className="flex justify-between items-baseline mb-1">
                 <span className="text-xs font-semibold text-slate-400">Median (50th percentile)</span>
-                <span className="text-sm font-mono font-bold text-violet-400">
+                <span className="text-sm font-mono font-bold text-violet-accent">
                   {latency.median_ms.toFixed(0)} ms
                 </span>
               </div>
               <div className="w-full bg-slate-950/80 h-2 rounded-full overflow-hidden border border-white/[0.03] p-[1px]">
                 <div 
-                  className="bg-gradient-to-r from-violet-500 to-indigo-500 h-full rounded-full"
+                  className="bg-gradient-to-r from-violet-accent to-indigo-500 h-full rounded-full"
                   style={{ width: `${Math.min((latency.median_ms / 3000) * 100, 100)}%` }}
                 />
               </div>
-              <span className="text-[10px] text-slate-500 font-bold block mt-1">Target Limit: &lt; 3.0 seconds</span>
+              <span className="text-[10px] text-slate-500 font-bold block mt-1">Target Limit: &lt; 3.0s</span>
             </div>
 
             {/* P95 Latency */}
             <div>
               <div className="flex justify-between items-baseline mb-1">
                 <span className="text-xs font-semibold text-slate-400">P95 (95th percentile)</span>
-                <span className="text-sm font-mono font-bold text-cyan-400">
+                <span className="text-sm font-mono font-bold text-cyan-accent">
                   {latency.p95_ms.toFixed(0)} ms
                 </span>
               </div>
               <div className="w-full bg-slate-950/80 h-2 rounded-full overflow-hidden border border-white/[0.03] p-[1px]">
                 <div 
-                  className="bg-gradient-to-r from-cyan-500 to-teal-500 h-full rounded-full"
+                  className="bg-gradient-to-r from-cyan-accent to-teal-500 h-full rounded-full"
                   style={{ width: `${Math.min((latency.p95_ms / 5000) * 100, 100)}%` }}
                 />
               </div>
-              <span className="text-[10px] text-slate-500 font-bold block mt-1">Target Limit: &lt; 5.0 seconds</span>
+              <span className="text-[10px] text-slate-500 font-bold block mt-1">Target Limit: &lt; 5.0s</span>
             </div>
             
-            {/* Indexing throughput metric */}
+            {/* Indexing average throughput */}
             <div className="pt-4 border-t border-white/[0.03] mt-2 flex justify-between items-center text-xs font-semibold">
               <span className="text-slate-400">Average Indexing Run Duration</span>
               <span className="font-mono text-slate-200">{indexing.avg_duration_ms.toFixed(0)} ms</span>
@@ -146,9 +146,9 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
           </div>
         </GlassCard>
 
-        {/* Caches Gauges card */}
-        <GlassCard className="p-6 border-white/[0.04] lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          {/* Query cache hit rate */}
+        {/* Circular Gauges */}
+        <GlassCard className="p-6 border-white/[0.04] bg-white/[0.01] lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+          {/* Query Cache */}
           <div className="flex flex-col items-center text-center">
             <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-4">
               Query Cache Hit Rate
@@ -189,7 +189,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
             </span>
           </div>
 
-          {/* Embedder cache hit rate */}
+          {/* Embedding Cache */}
           <div className="flex flex-col items-center text-center">
             <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-4">
               Embedding Cache Hit Rate
@@ -232,8 +232,8 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
         </GlassCard>
       </div>
 
-      {/* Failure logs analysis card */}
-      <GlassCard className="p-6 border-white/[0.04]">
+      {/* Pipeline Exceptions Logs */}
+      <GlassCard className="p-6 border-white/[0.04] bg-white/[0.01]">
         <h3 className="font-heading font-bold text-xs text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
           <AlertOctagon size={14} className="text-slate-500" />
           Active Exceptions Logs ({failures.total})
@@ -241,9 +241,9 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
         
         {failures.total === 0 ? (
           <div className="py-6 text-center text-slate-600 flex flex-col items-center">
-            <CheckCircle size={32} className="text-emerald-500/20 mb-2" />
-            <p className="font-heading font-extrabold text-sm text-slate-400 uppercase tracking-wider">0 Errors Logged</p>
-            <p className="text-xs text-slate-500 font-semibold mt-0.5">System operations functioning normally.</p>
+            <CheckCircle size={32} className="text-emerald-accent/20 mb-2" />
+            <p className="font-heading font-extrabold text-xs text-slate-400 uppercase tracking-wider">0 Errors Logged</p>
+            <p className="text-[11px] text-slate-500 font-semibold mt-0.5">System operations functioning normally.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-3">
@@ -253,10 +253,10 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
                 className="flex justify-between items-center bg-slate-950/40 border border-white/[0.03] p-3.5 rounded-xl text-xs font-semibold text-slate-300"
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-rose-accent animate-pulse" />
                   <span className="font-mono text-slate-200">{type}</span>
                 </div>
-                <span className="px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/10 text-[10px] font-bold uppercase tracking-wider">
+                <span className="px-2 py-0.5 rounded bg-rose-500/10 text-rose-accent border border-rose-500/10 text-[9px] font-bold uppercase tracking-wider">
                   {count} errors
                 </span>
               </div>
