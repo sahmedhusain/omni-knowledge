@@ -94,6 +94,18 @@ class Embedder:
                 # Fallback extraction
                 return response.get("embedding", [])
                 
+        elif provider == "ollama":
+            from openai import OpenAI
+            client = OpenAI(
+                base_url=settings.OLLAMA_BASE_URL,
+                api_key="ollama"
+            )
+            response = client.embeddings.create(
+                input=[text],
+                model=settings.OLLAMA_EMBEDDING_MODEL
+            )
+            return response.data[0].embedding
+            
         else:
             raise ValueError(f"Unsupported LLM_PROVIDER: {provider}")
 

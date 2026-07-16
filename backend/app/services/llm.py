@@ -79,5 +79,27 @@ class LLMService:
             response = model.generate_content(prompt)
             return response.text
             
+        elif provider == "ollama":
+            from openai import OpenAI
+            client = OpenAI(
+                base_url=settings.OLLAMA_BASE_URL,
+                api_key="ollama"
+            )
+            messages = [{"role": "system", "content": system_instruction}]
+            if history:
+                for msg in history:
+                    messages.append({
+                        "role": msg.get("role", "user"),
+                        "content": msg.get("content", "")
+                    })
+            messages.append({"role": "user", "content": f"Context:\n{context_str}\n\nQuestion: {query}"})
+            
+            response = client.chat.completions.create(
+                model=settings.OLLAMA_LLM_MODEL,
+                messages=messages,
+                temperature=0.0
+            )
+            return response.choices[0].message.content
+            
         else:
             raise ValueError(f"Unsupported LLM_PROVIDER: {provider}")
