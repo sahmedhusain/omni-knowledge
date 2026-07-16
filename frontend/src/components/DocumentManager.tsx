@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDocuments } from '../hooks/useDocuments';
-import { Upload, Trash2, RefreshCw, FileText, AlertCircle, CheckCircle } from 'lucide-react';
+import { Upload, Trash2, RefreshCw, FileText, AlertCircle, CheckCircle, Database } from 'lucide-react';
 import GlassCard from './GlassCard';
 
 export const DocumentManager: React.FC = () => {
@@ -38,7 +38,7 @@ export const DocumentManager: React.FC = () => {
       try {
         await uploadDocument(file, tag);
       } catch {
-        // Error is set in hook
+        // Handled by hook
       }
     }
   };
@@ -49,7 +49,7 @@ export const DocumentManager: React.FC = () => {
       try {
         await uploadDocument(file, tag);
       } catch {
-        // Error is set in hook
+        // Handled by hook
       }
     }
   };
@@ -61,7 +61,7 @@ export const DocumentManager: React.FC = () => {
   const formatSize = (bytes: number) => {
     if (bytes === 0) return '0 B';
     const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const sizes = ['B', 'KB', 'MB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   };
@@ -76,13 +76,13 @@ export const DocumentManager: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 text-left">
-      {/* Upload and Control Header */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Upload Box */}
+    <div className="flex flex-col gap-6 text-left animate-fade-in">
+      {/* Control panels grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Drag & Drop Upload Zone */}
         <GlassCard 
-          className={`col-span-2 p-6 flex flex-col items-center justify-center border-2 border-dashed transition-all duration-200 min-h-60 ${
-            dragActive ? 'border-violet-500 bg-violet-950/15' : 'border-slate-800 hover:border-slate-700'
+          className={`lg:col-span-2 p-6 flex flex-col items-center justify-center border-2 border-dashed transition-all duration-200 min-h-60 relative ${
+            dragActive ? 'border-violet-500 bg-violet-950/10' : 'border-white/[0.04] hover:border-white/[0.08]'
           }`}
           onDragEnter={handleDrag}
           onDragOver={handleDrag}
@@ -96,26 +96,28 @@ export const DocumentManager: React.FC = () => {
             className="hidden"
             accept=".txt,.md,.json"
           />
-          <Upload className={`mb-3 text-slate-500 transition-colors ${dragActive ? 'text-violet-400' : ''}`} size={32} />
-          <p className="font-heading font-bold text-slate-200 mb-1 text-sm md:text-base">
-            Drag & drop document here, or{' '}
-            <button type="button" onClick={onButtonClick} className="text-violet-400 hover:underline">
+          <Upload className={`mb-3.5 transition-colors duration-200 ${dragActive ? 'text-violet-400' : 'text-slate-500'}`} size={32} />
+          
+          <p className="font-heading font-extrabold text-sm md:text-base text-slate-200 mb-1.5 text-center">
+            Drag and drop doc here, or{' '}
+            <button type="button" onClick={onButtonClick} className="text-violet-400 hover:underline font-bold">
               browse files
             </button>
           </p>
-          <p className="text-xs text-slate-500 font-semibold mb-4">
-            Supports plain text (.txt), Markdown (.md), and JSON (.json) files
+          
+          <p className="text-xs text-slate-500 font-bold mb-4">
+            Supports plain text (.txt), Markdown (.md), and JSON (.json)
           </p>
           
-          {/* Tag Configuration */}
-          <div className="flex items-center gap-3 bg-slate-900/60 p-2 rounded-xl border border-slate-800">
-            <span className="text-xs text-slate-400 font-bold uppercase tracking-wider pl-2">
-              Document Tag:
+          {/* Metadata category selection */}
+          <div className="flex items-center gap-3 bg-slate-950/60 p-2 px-3.5 rounded-xl border border-white/[0.03]">
+            <span className="text-[9px] text-slate-500 font-extrabold uppercase tracking-wider">
+              Category Tag
             </span>
             <select
               value={tag}
               onChange={(e) => setTag(e.target.value)}
-              className="bg-slate-950 border border-slate-800 text-slate-200 rounded-lg text-xs font-semibold px-2 py-1 outline-none focus:border-violet-500"
+              className="bg-slate-900 border border-slate-800/80 text-slate-200 rounded-lg text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 outline-none focus:border-violet-500 transition-colors"
             >
               <option value="general">General</option>
               <option value="policy">Policy</option>
@@ -126,71 +128,74 @@ export const DocumentManager: React.FC = () => {
           </div>
         </GlassCard>
 
-        {/* Status / Reindex Controls */}
-        <GlassCard className="p-6 flex flex-col justify-between border-slate-800">
+        {/* Index sync controllers */}
+        <GlassCard className="p-6 flex flex-col justify-between border-white/[0.04]">
           <div>
-            <h3 className="font-heading font-bold text-base text-slate-200 mb-2">
-              Index Sync Controller
-            </h3>
-            <p className="text-xs text-slate-500 font-semibold mb-4 leading-normal">
-              Synchronizes local file contents with the FAISS vector database. When files are added or deleted, automatic incremental builds trigger. Use full re-indexing if source folders are manually updated.
+            <div className="flex items-center gap-2 mb-3">
+              <Database size={16} className="text-violet-400" />
+              <h3 className="font-heading font-extrabold text-sm text-slate-200 uppercase tracking-wider">
+                Index Operations
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500 font-bold leading-relaxed mb-4">
+              Indexes are updated incrementally during upload or delete. Trigger a full system re-indexing if source directories are edited outside this panel.
             </p>
           </div>
 
           <button
             onClick={reindexAll}
             disabled={indexing || loading}
-            className="btn-primary w-full flex items-center justify-center gap-2 h-12 rounded-xl text-sm font-semibold transition-all duration-200 disabled:opacity-50"
+            className="btn-primary w-full flex items-center justify-center gap-2 h-11 rounded-xl text-xs uppercase tracking-wider font-extrabold transition-all duration-200 disabled:opacity-50"
           >
-            <RefreshCw size={16} className={indexing ? 'animate-spin' : ''} />
-            {indexing ? 'Reindexing...' : 'Full System Re-index'}
+            <RefreshCw size={14} className={indexing ? 'animate-spin' : ''} />
+            {indexing ? 'Reindexing...' : 'Re-index Database'}
           </button>
         </GlassCard>
       </div>
 
-      {/* Error alert */}
+      {/* Error reporting alert */}
       {error && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-sm font-medium">
-          <AlertCircle size={18} className="flex-shrink-0" />
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/10 text-rose-300 text-xs font-semibold">
+          <AlertCircle size={16} className="flex-shrink-0" />
           {error}
         </div>
       )}
 
-      {/* Document List Table */}
-      <GlassCard className="overflow-hidden border-slate-800">
-        <div className="px-6 py-4 border-b border-slate-800/80 bg-slate-900/30 flex justify-between items-center">
-          <h3 className="font-heading font-bold text-sm text-slate-300 uppercase tracking-wider">
-            Indexed Resources ({documents.length})
+      {/* Document Records Card */}
+      <GlassCard className="overflow-hidden border-white/[0.04]">
+        <div className="px-6 py-4 border-b border-white/[0.03] bg-white/[0.01] flex justify-between items-center">
+          <h3 className="font-heading font-extrabold text-xs text-slate-400 uppercase tracking-wider">
+            Active Documents Base ({documents.length})
           </h3>
         </div>
 
         {documents.length === 0 ? (
-          <div className="p-12 text-center text-slate-500 flex flex-col items-center">
-            <FileText size={40} className="mb-2 text-slate-600" />
-            <p className="font-semibold text-sm">No documents indexed yet.</p>
-            <p className="text-xs mt-1">Upload files above to populate the knowledge assistant base.</p>
+          <div className="p-16 text-center text-slate-600 flex flex-col items-center">
+            <FileText size={48} className="mb-3 text-slate-700" />
+            <p className="font-heading font-extrabold text-sm text-slate-400 uppercase tracking-wider">Empty Repository</p>
+            <p className="text-xs text-slate-500 font-semibold mt-1">Upload knowledge assets to begin querying.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                  <th className="px-6 py-3">Filename</th>
-                  <th className="px-6 py-3">Tag</th>
-                  <th className="px-6 py-3">Size</th>
-                  <th className="px-6 py-3">Status</th>
-                  <th className="px-6 py-3">Last Modified</th>
-                  <th className="px-6 py-3 text-right">Actions</th>
+                <tr className="border-b border-white/[0.03] text-[10px] font-bold text-slate-500 uppercase tracking-wider bg-slate-950/20">
+                  <th className="px-6 py-3.5">Filename</th>
+                  <th className="px-6 py-3.5">Category</th>
+                  <th className="px-6 py-3.5">File Size</th>
+                  <th className="px-6 py-3.5">Status</th>
+                  <th className="px-6 py-3.5">Indexed Date</th>
+                  <th className="px-6 py-3.5 text-right">Delete</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 text-xs font-semibold text-slate-300">
+              <tbody className="divide-y divide-white/[0.02] text-xs font-semibold text-slate-300">
                 {documents.map((doc) => (
-                  <tr key={doc.id} className="hover:bg-slate-900/15">
+                  <tr key={doc.id} className="hover:bg-white/[0.01]">
                     <td className="px-6 py-4 font-mono font-medium text-slate-200">
                       {doc.filename}
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-0.5 rounded bg-violet-950/20 text-violet-400 border border-violet-500/10 uppercase tracking-wider">
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/10 uppercase tracking-wide">
                         {doc.tag || 'general'}
                       </span>
                     </td>
@@ -198,14 +203,14 @@ export const DocumentManager: React.FC = () => {
                       {formatSize(doc.size_bytes)}
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[10px] uppercase font-bold ${
-                        doc.status === 'indexed' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
-                        doc.status === 'indexing' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
-                        'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[9px] uppercase font-bold ${
+                        doc.status === 'indexed' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/15' :
+                        doc.status === 'indexing' ? 'bg-amber-500/10 text-amber-400 border-amber-500/15' :
+                        'bg-rose-500/10 text-rose-400 border-rose-500/15'
                       }`}>
-                        {doc.status === 'indexed' && <CheckCircle size={10} />}
-                        {doc.status === 'indexing' && <RefreshCw size={10} className="animate-spin" />}
-                        {doc.status === 'failed' && <AlertCircle size={10} />}
+                        {doc.status === 'indexed' && <CheckCircle size={9} />}
+                        {doc.status === 'indexing' && <RefreshCw size={9} className="animate-spin" />}
+                        {doc.status === 'failed' && <AlertCircle size={9} />}
                         {doc.status}
                       </span>
                     </td>
@@ -216,7 +221,7 @@ export const DocumentManager: React.FC = () => {
                       <button
                         onClick={() => deleteDocument(doc.id)}
                         className="text-slate-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-rose-500/10 transition-colors"
-                        title="Delete Document"
+                        title="Delete record"
                       >
                         <Trash2 size={15} />
                       </button>
