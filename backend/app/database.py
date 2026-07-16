@@ -60,6 +60,19 @@ def init_db():
             sources TEXT
         )
     """)
+
+    # Indexing logs table for throughput metrics
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS indexing_logs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT NOT NULL,
+            filename TEXT NOT NULL,
+            duration_ms INTEGER NOT NULL,
+            chunks_count INTEGER NOT NULL,
+            status TEXT NOT NULL,
+            error TEXT
+        )
+    """)
     
     conn.commit()
     conn.close()
