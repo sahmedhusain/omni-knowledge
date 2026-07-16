@@ -2,11 +2,17 @@ import { useState, useEffect } from 'react';
 import type { SearchResponse } from '../types/api';
 import api from '../services/api';
 
+export type ChatMessage = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 export function useSearch() {
   const [response, setResponse] = useState<SearchResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [history, setHistory] = useState<string[]>([]);
+  const [chatLog, setChatLog] = useState<ChatMessage[]>([]);
 
   useEffect(() => {
     // Load search history from local storage on mount
@@ -27,9 +33,16 @@ export function useSearch() {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.askQuestion(trimmed, topK);
+      const res = await api.askQuestion(trimmed, topK, chatLog);
       setResponse(res);
       
+      // Update chat message log history
+      setChatLog((prev) => [
+        ...prev,
+        { role: 'user', content: trimmed },
+        { role: 'assistant', content: res.answer }
+      ]);
+
       // Update history in state and localStorage
       setHistory((prev) => {
         const filtered = prev.filter((h) => h !== trimmed);
@@ -50,13 +63,20 @@ export function useSearch() {
     localStorage.removeItem('guidely_search_history');
   };
 
+  const clearChat = () => {
+    setChatLog([]);
+    setResponse(null);
+  };
+
   return {
     response,
     loading,
     error,
     history,
+    chatLog,
     askQuestion,
     clearHistory,
+    clearChat,
   };
 }
 

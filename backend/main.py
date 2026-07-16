@@ -32,13 +32,26 @@ async def startup_event():
 # Include consolidated api router
 app.include_router(api_router)
 
+@app.get("/health")
+async def health_root():
+    """Alias for /api/metrics/health"""
+    from backend.app.api.metrics import health_check
+    return await health_check()
+
+@app.get("/metrics")
+async def metrics_root():
+    """Alias for /api/metrics"""
+    from backend.app.api.metrics import get_system_metrics
+    return await get_system_metrics()
+
 @app.get("/")
 async def root():
     return {
         "message": "Welcome to Guidely internal knowledge assistant API",
         "endpoints": {
             "docs": "/docs",
-            "health": "/api/metrics/health"
+            "health": "/health",
+            "metrics": "/metrics"
         }
     }
 

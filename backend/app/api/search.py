@@ -92,7 +92,7 @@ async def ask_question(request: SearchRequest):
         chunks.sort(key=lambda c: c["score"])
         
         # Generate LLM answer
-        answer = LLMService.generate_answer(query, chunks)
+        answer = LLMService.generate_answer(query, chunks, history=request.history)
         
         latency_ms = int((time.time() - start_time) * 1000)
         

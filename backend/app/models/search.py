@@ -4,6 +4,7 @@ from typing import List, Optional
 class SearchRequest(BaseModel):
     query: str = Field(..., min_length=1, description="Question query text")
     top_k: Optional[int] = Field(default=3, ge=1, le=10, description="Number of source chunks to retrieve")
+    history: Optional[List[dict]] = Field(default=None, description="Previous chat conversation history")
 
 class SourceResponse(BaseModel):
     filename: str

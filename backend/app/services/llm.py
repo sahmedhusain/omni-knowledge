@@ -5,7 +5,7 @@ class LLMService:
     """Service to coordinate RAG context building and answer generation."""
 
     @classmethod
-    def generate_answer(cls, query: str, chunks: List[Dict]) -> str:
+    def generate_answer(cls, query: str, chunks: List[Dict], history: List[Dict] = None) -> str:
         """Assembles prompt and queries LLM using current settings."""
         if not chunks:
             return "I couldn't find any relevant documents to answer this question. Please upload resources first."
@@ -37,12 +37,18 @@ class LLMService:
             from openai import OpenAI
             client = OpenAI(api_key=settings.OPENAI_API_KEY)
             
+            messages = [{"role": "system", "content": system_instruction}]
+            if history:
+                for msg in history:
+                    messages.append({
+                        "role": msg.get("role", "user"),
+                        "content": msg.get("content", "")
+                    })
+            messages.append({"role": "user", "content": f"Context:\n{context_str}\n\nQuestion: {query}"})
+            
             response = client.chat.completions.create(
                 model=settings.OPENAI_LLM_MODEL,
-                messages=[
-                    {"role": "system", "content": system_instruction},
-                    {"role": "user", "content": f"Context:\n{context_str}\n\nQuestion: {query}"}
-                ],
+                messages=messages,
                 temperature=0.0
             )
             return response.choices[0].message.content
@@ -53,13 +59,23 @@ class LLMService:
             import google.generativeai as genai
             genai.configure(api_key=settings.GEMINI_API_KEY)
             
-            # Use model with system instructions
             model = genai.GenerativeModel(
                 model_name=settings.GEMINI_LLM_MODEL,
                 system_instruction=system_instruction
             )
             
-            prompt = f"Context:\n{context_str}\n\nQuestion: {query}"
+            # Format history directly into prompt for robust parsing
+            prompt_lines = []
+            if history:
+                prompt_lines.append("Previous Conversation History:")
+                for msg in history:
+                    role_label = "User" if msg.get("role") == "user" else "Assistant"
+                    prompt_lines.append(f"{role_label}: {msg.get('content', '')}")
+                prompt_lines.append("\n--- Current Context and Question ---")
+                
+            prompt_lines.append(f"Context:\n{context_str}\n\nQuestion: {query}")
+            prompt = "\n".join(prompt_lines)
+            
             response = model.generate_content(prompt)
             return response.text
             

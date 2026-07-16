@@ -44,13 +44,13 @@ class ApiClient {
     });
   }
 
-  async askQuestion(query: string, topK: number = 3): Promise<SearchResponse> {
+  async askQuestion(query: string, topK: number = 3, history?: { role: string; content: string }[]): Promise<SearchResponse> {
     return this.fetchJson<SearchResponse>('/search/ask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ query, top_k: topK }),
+      body: JSON.stringify({ query, top_k: topK, history }),
     });
   }
 
