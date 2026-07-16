@@ -1,9 +1,13 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
+
+# Load the env variables from the project root .env file
+load_dotenv(dotenv_path=BASE_DIR.parent / ".env")
 
 class Settings:
     # Environment
