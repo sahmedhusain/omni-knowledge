@@ -1,32 +1,28 @@
-# Guidely System Architecture Technical Specification
+# Guidely Corporate Operations Technical Guidelines
 
-This document details the internal workings of the Guidely RAG (Retrieval-Augmented Generation) copilot pipeline.
+This document outlines the standard operating procedures and technical resources utilized by Guidely employees in client service and corporate administration roles.
 
-## 1. Technical Stack Details
-Guidely's application is divided into two primary systems:
-- **Backend Service**: Built on **FastAPI** (Python 3.9+). It exposes endpoints for document ingestion, FAISS searches, and metrics logging. It connects to an SQLite database.
-- **Frontend App**: Built on **React** (Vite + TypeScript + Tailwind CSS v4). It features a dark-mode glassmorphic interface with interactive citation overlays and circular metric widgets.
+## 1. Client Database and CRM (Salesforce)
+We use Salesforce to manage our customer relations, advisory leads, and historical contract data.
+- **Data Input**: Operations staff must log every client call and project status change within 24 hours.
+- **Reporting**: Weekly sales funnel reports are compiled automatically on Friday afternoons.
+- **Access Control**: Logins are secured via single sign-on (SSO) and require multi-factor authentication (MFA).
 
-## 2. Ingestion and Text Chunking Pipeline
-When a document is ingested via `/api/documents/upload`:
-1. The document parser reads the file contents and decodes them to UTF-8.
-2. The `Chunker` splits the document into smaller semantic text blocks.
-3. Chunks are sized at **800 tokens** with a sliding overlap of **100 tokens** to prevent context loss at chunk boundaries.
-4. Each chunk's checksum (MD5) is calculated and saved in the SQLite `chunks` table alongside the parent file reference.
+## 2. File Organization and Cloud Storage
+Guidely utilizes secure corporate Google Drive folders to store project deliverable assets:
+- **Directory Naming**: Always use the format `[Client Name] - [Project Name] - [Year]` for root client directories.
+- **Sensitive Folders**: Place client financials and salary grids inside subfolders named `Confidential_HR`.
+- **Retention**: Active project assets are archived to offline servers 12 months after project completion.
 
-## 3. Local FAISS Vector Store Index
-Guidely uses the Facebook AI Similarity Search (FAISS) library to perform local vector storage and nearest-neighbor search.
-- **Index Type**: We use `IndexFlatL2` which computes the L2 Euclidean distance between the query vector and all chunk vectors.
-- **Mappings**: Because FAISS does not store metadata (such as document name or text content), we maintain an array of SQLite chunk IDs in `mappings.json` which maps directly to the rows in the FAISS float matrix.
-- **Rebuilding**: Adding or deleting documents triggers a full rebuild of the FAISS index by compiling all active chunk vectors from the SQLite database.
+## 3. IT Security and Workstation Protection
+To comply with global data safety regulations, all corporate laptops must follow these protocols:
+- **Operating System Updates**: Ensure security patches are installed within 48 hours of prompt.
+- **Password Complexity**: Passwords must be at least 12 characters long and changed every 90 days.
+- **Corporate VPN**: The Guidely secure VPN must be active whenever accessing internal files from home or public networks.
 
-## 4. Embedding Cache Database Schema
-To reduce external API call latencies and fees, we maintain a persistent cache in SQLite (`embedding_cache` table):
-- Columns: `checksum` (text hash, primary key) and `embedding` (serialized float array).
-- Before calling OpenAI or Gemini, the system queries the cache. On a hit, it deserializes the JSON string to a float array, resulting in **100% cache hits** for unchanged texts.
-
-## 5. Telemetry Tracking
-All search queries and indexing runs log their latency, hit rates, exceptions, and retrieved passage details into the `query_logs` and `indexing_logs` database tables.
-- **Median Latency**: Optimized to remain under **3.0 seconds** (typically ~850ms warm cache).
-- **P95 Latency**: Optimized to remain under **5.0 seconds** (typically ~1.8s).
-- **CSV Export**: The endpoint `/api/metrics/export/csv` generates downloadable query logs for system analytics.
+## 4. Software Tool Stack for Collaboration
+Guidely provides licenses for the following approved communication and productivity utilities:
+- **Slack**: For instant messaging, department threads, and corporate announcements.
+- **Zoom**: For client presentations, sales pitches, and regional team meetings.
+- **Google Workspace**: For shared documents, project spreadsheets, and corporate slide decks.
+- **Asana**: For project checklist coordination and deliverable tracking.

@@ -1,64 +1,23 @@
-# Guidely Employee Onboarding Handbook
+# Guidely Corporate HR Onboarding Guide
 
-## Welcome to the Team!
-This guide is designed to help you set up your workstations, configure credentials, and make your first code contributions within your first week. Please review each section carefully and tick off items in your onboarding checklist.
+## Welcome to Guidely Inc.!
+We are thrilled to welcome you to our growing team. This guide outlines your onboarding roadmap, benefit enrollments, and first-week priorities.
 
-## Week 1 Milestones and Checklist
-- **Day 1**: Workstation provisioning, repository access configuration, and basic setup.
-- **Day 2**: Local environment initialization (Python virtualenv, Node packages, SQLite databases).
-- **Day 3**: Run local verification tests and query the backend RAG pipeline.
-- **Day 4**: Make your first frontend modification (Tailwind CSS v4 layouts, components adjustment).
-- **Day 5**: Deploy your first branch to the staging environment and review performance metrics.
+## First Week Checklist
+- **Day 1**: Attend the HR orientation session, complete tax and payroll documentation, and receive your corporate ID card.
+- **Day 2**: Meet your team lead, set up your email and communication accounts, and join the company welcome thread.
+- **Day 3**: Review the Guidely Corporate Profile and complete the operational onboarding module.
+- **Day 4**: Review your quarterly deliverables and schedule your first 1-on-1 alignment check-in.
+- **Day 5**: Complete your benefits enrollment form (health, dental, and retirement options).
 
-## Workstation Provisioning
-Every engineer is provided with a MacBook Pro running macOS. During your initial setup:
-1. Log in using your corporate email credentials.
-2. Install the necessary terminal utilities: Homebrew, Git, and VS Code.
-3. Configure your Git credentials to match your GitHub organization account:
-   ```bash
-   git config --global user.name "Your Name"
-   git config --global user.email "your.email@guidely.com"
-   ```
+## Corporate Systems Account Configuration
+During your first 48 hours, IT will assist you in configuring your access to our primary business applications:
+1. **Corporate Email & Calendar**: Access your mail and schedule through Gmail using your `@guidely.com` address.
+2. **Internal Communication**: Join our Slack channels to collaborate with team members across New York, London, and Singapore.
+3. **Client CRM Platform**: Operations team members will receive logins for Salesforce to manage active consulting leads.
 
-## Developer Environment Setup
-To build and run Guidely locally, follow these technical onboarding steps:
-
-### 1. Backend Service Configuration
-We use Python 3.9+ for our vector retrieval pipeline.
-- Create a virtual environment inside the `backend` directory:
-  ```bash
-  python3 -m venv backend/venv
-  source backend/venv/bin/activate
-  ```
-- Install pip dependencies:
-  ```bash
-  pip install -r backend/requirements.txt
-  ```
-- Copy the template environment file:
-  ```bash
-  cp .env.template .env
-  ```
-- Configure your Gemini API key in the `.env` file under `GEMINI_API_KEY`.
-
-### 2. Frontend Web App Configuration
-We use React with Vite and Tailwind CSS v4.
-- Navigate to the `frontend` folder:
-  ```bash
-  cd frontend
-  ```
-- Install npm packages:
-  ```bash
-  npm install
-  ```
-- Run the dev server to verify:
-  ```bash
-  npm run dev
-  ```
-
-## Working with SQLite Databases
-Guidely stores documents metadata, performance metrics, and embedding caches in a local SQLite file located at `backend/data/db/guidely.db`.
-- To inspect database records, you can use the sqlite3 CLI tool:
-  ```bash
-  sqlite3 backend/data/db/guidely.db
-  ```
-- Standard tables include `documents` (records metadata), `chunks` (retrieved paragraphs), `embedding_cache` (saves cost on API keys), and `query_logs` (stores query latencies).
+## Benefits and Perks Enrollment
+Guidely provides a premium benefits package to support our employees:
+- **Health and Dental Insurance**: Full coverage plans are available for employees and their immediate families.
+- **Retirement Planning**: Guidely offers a 401(k) matching program where the company matches up to 4% of your contributions.
+- **Wellness Allowance**: Employees are eligible for a monthly reimbursement of $50 USD to cover gym memberships or wellness apps.

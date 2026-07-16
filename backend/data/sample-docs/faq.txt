@@ -1,22 +1,19 @@
-# Guidely Internal Frequently Asked Questions (FAQ)
+# Guidely Employee Frequently Asked Questions (FAQ)
 
-## Q: What are the core collaboration hours?
-A: Our core collaboration hours are from **10:00 AM to 3:00 PM EST** daily. During these hours, teams are expected to be available online for meetings, reviews, and syncs. Outside this range, you can manage your work hours autonomously.
+## Q: When is the monthly pay schedule?
+A: Salaries are processed and deposited directly into your bank account on the **25th of every month**. If the 25th falls on a weekend or public holiday, payments are made on the preceding business day.
 
-## Q: How do I request a travel reimbursement?
-A: Travel reimbursements must be submitted through the corporate expense portal. You must upload itemized receipts for meals, accommodation, and transport. The daily limit for meals is **$75 USD**.
+## Q: How do I request vacation time?
+A: Annual leave requests must be submitted through our HR Portal at least two weeks in advance. Once your manager approves the request, the days will be deducted from your yearly vacation balance.
 
-## Q: What files can be uploaded to the Knowledge Base?
-A: The Guidely copilot supports plain text files (`.txt`), Markdown files (`.md`), and JSON files (`.json`). PDF and word documents must be converted to plain text format before ingestion.
+## Q: What is the daily expense reimbursement cap?
+A: For approved business travel, the daily reimbursement cap for meals is **$75 USD**. Itemized receipts are required for all transactions above $25 USD.
 
-## Q: How does the embedding cache work?
-A: When a document chunk or query is processed, we calculate its cryptographic checksum. Before calling external APIs (like OpenAI or Gemini), we check if this checksum exists in the `embedding_cache` database table. If it does, we return the cached vector. This achieves **100% cache hits** for unchanged resources and saves significant API costs.
+## Q: Where do I get office parking access?
+A: Parking passes are managed by the Facilities Team. New employees can request a monthly parking sticker during their first week. Spots are available on a first-come, first-served basis in the basement garage.
 
-## Q: What should I do if the API server is offline?
-A: If the API server health indicator shows "Offline" in the UI:
-1. Verify that your FastAPI backend is running at `http://localhost:8000`.
-2. Check your `.env` file to ensure the API keys are correct.
-3. Inspect `backend/data/db/guidely.db` write permissions.
+## Q: What software tools are approved for client communications?
+A: Guidely approved tools for client engagements are Zoom, Slack, and email. Any other communication tool must receive approval from the IT Security Team prior to client contact.
 
-## Q: Where is the vector database stored?
-A: Guidely uses a local FAISS index file. It is serialized to disk in the `backend/data/vector_store/index.faiss` directory. Mappings back to the SQLite chunks are saved in `mappings.json` inside the same folder.
+## Q: How do I access the office outside business hours?
+A: Your corporate badge is configured for 24/7 access to all regional hubs. If you experience badge errors, contact the Security desk or email `security@guidely.com`.

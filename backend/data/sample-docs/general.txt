@@ -1,25 +1,18 @@
-# Guidely Corporate Headquarters General Guide
+# Guidely Corporate Profile and Business Overview
 
-## 1. Company Vision and Mission
-Welcome to Guidely. Our core mission is to democratize organizational knowledge, making it instantly accessible, highly contextual, and simple to consume. We believe that when knowledge is unlocked, teams operate with maximum autonomy, clarity, and speed. Our vision is to build the world's most intuitive internal knowledge copilot that bridges the gap between structured documentation and natural human conversation.
+## 1. Executive Summary
+Guidely Inc. is a leading global corporate solutions provider specializing in business process optimization, organizational consulting, and knowledge management services. Since our founding, we have assisted over 500 enterprise clients in streamlining their operations, improving internal communications, and maximizing team productivity. Our primary objective is to make complex corporate information simple, accessible, and actionable.
 
-## 2. Workplace Principles
-At Guidely, we operate on three fundamental principles:
-- **Autonomy**: We trust our engineers and product designers to own their outcomes. You are empowered to make technical decisions, choose layouts, and implement pipelines as long as they adhere to user quality specifications.
-- **Transparency**: All architecture designs, metrics, and meeting logs are open by default to all team members. 
-- **User-Centricity**: Every feature we develop must solve a direct customer pain point. If a layout is confusing or text is clipped, it is considered a blocker that must be resolved immediately.
+## 2. Our Core Business Services
+Guidely delivers client value across three strategic business units:
+- **Strategic Advisory**: We partner with executive teams to design organizational structures that promote speed, transparency, and collaboration.
+- **Operations Consulting**: We audit workflow bottlenecks, document procedures, and build internal knowledge frameworks.
+- **Corporate Training**: We design and implement interactive training courses to align client staff with new processes.
 
-## 3. Communication Framework
-Our communication strategy is remote-first but asynchronous-friendly. We use the following channels:
-- **Workspace Chat**: For day-to-day coordination, check-ins, and quick updates.
-- **Guidely Copilot Dashboard**: For indexing, querying documents, and auditing performance telemetry.
-- **Code Repositories**: For PR comments, code reviews, and visual layout discussions.
+## 3. Organizational Values
+- **Integrity First**: We maintain the highest standards of professional ethics in all client engagements and internal practices.
+- **Clarity and Simplicity**: We strip away unnecessary complexity and jargon, focusing on clear, plain-language solutions.
+- **Client Empowerment**: We build structures that enable our clients to operate independently and successfully long after our engagement ends.
 
-## 4. Collaborative Core Hours
-To facilitate cross-functional collaboration while respecting individual work schedules, we maintain standard collaboration hours:
-- Core hours are scheduled daily from **10:00 AM to 3:00 PM EST**.
-- During these hours, teams are expected to be available for sync meetings, design reviews, and pair-programming sessions.
-- Outside of core hours, you have full flexibility to manage your time and output.
-
-## 5. Global Locations
-Guidely has physical collaboration hubs in London, San Francisco, Dubai, and Singapore. Team members are welcome to work from any of these offices at any time. Badge access is coordinated through the corporate security office. Each hub is equipped with high-speed fiber internet, private developer booths, and catered snack areas.
+## 4. Business Operations and Hubs
+Guidely operates on a hybrid model with major regional headquarters in New York, London, and Singapore. Our client services teams are distributed globally, ensuring 24/7 support for international enterprise accounts. All office facilities are designed to foster collaboration and focus, equipped with modern meeting rooms and client reception areas.
