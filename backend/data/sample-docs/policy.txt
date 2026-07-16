@@ -1,7 +1,24 @@
-Guidely Expense Policy
+# Guidely Corporate Policies and Regulations
 
-Employees can claim business-related expenses such as meals, travel, and accommodation.
-Meals during travel are reimbursable up to $50 per day. Receipt uploads are mandatory for all claims exceeding $25.
-Flight tickets must be booked in economy class. Business class is permitted only for international flights exceeding 8 hours.
-Hotel stays must not exceed $150 per night, unless staying in high-cost cities like New York or Tokyo where the limit is $250.
-Submit all expense reports through the HR Portal by the 5th of the following month. Delayed submissions will be rejected.
+## 1. Remote Work Policy
+Guidely operates under a flexible, hybrid work model. All employees are allowed to work remotely up to 100% of the time, provided they maintain communication during core hours (**10:00 AM to 3:00 PM EST**) and achieve their deliverables. The company provides a remote work allowance of **$500 USD** once per year to purchase home office equipment (ergonomic chairs, monitors, keyboard).
+
+## 2. Travel Expense Policy
+All corporate travel must be pre-approved by your team manager. Reimbursable categories include:
+- **Accommodation**: Standard hotel rooms up to **$200 USD per night**.
+- **Meals**: Daily food and beverage reimbursement is capped at **$75 USD**.
+- **Transport**: Standard class flights, trains, and rideshares are fully covered.
+- **Receipts**: Itemized receipts are mandatory for all transactions exceeding $25 USD. Credit card statements alone are not accepted.
+
+## 3. Equipment and Asset Policy
+All laptops, testing mobile phones, and security keys provided by Guidely remain company property.
+- **Security Patches**: You must install system security updates within 48 hours of release.
+- **Loss or Theft**: Report lost or stolen equipment to `security@guidely.com` immediately.
+- **Return of Assets**: Upon resignation or termination, all hardware must be returned to HR within 5 business days.
+
+## 4. Code Review and Deployments
+We enforce a strict code quality policy to avoid visual layout bugs and broken APIs:
+- All pull requests require at least one approving review from a senior engineer.
+- Unit tests must be run and pass locally before making a PR.
+- Tailwind CSS v4 variables must be structured inside `index.css` under the `@theme` directive.
+- Direct pushes to the `main` branch are blocked.

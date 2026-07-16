@@ -1,0 +1,25 @@
+# Guidely Corporate Headquarters General Guide
+
+## 1. Company Vision and Mission
+Welcome to Guidely. Our core mission is to democratize organizational knowledge, making it instantly accessible, highly contextual, and simple to consume. We believe that when knowledge is unlocked, teams operate with maximum autonomy, clarity, and speed. Our vision is to build the world's most intuitive internal knowledge copilot that bridges the gap between structured documentation and natural human conversation.
+
+## 2. Workplace Principles
+At Guidely, we operate on three fundamental principles:
+- **Autonomy**: We trust our engineers and product designers to own their outcomes. You are empowered to make technical decisions, choose layouts, and implement pipelines as long as they adhere to user quality specifications.
+- **Transparency**: All architecture designs, metrics, and meeting logs are open by default to all team members. 
+- **User-Centricity**: Every feature we develop must solve a direct customer pain point. If a layout is confusing or text is clipped, it is considered a blocker that must be resolved immediately.
+
+## 3. Communication Framework
+Our communication strategy is remote-first but asynchronous-friendly. We use the following channels:
+- **Workspace Chat**: For day-to-day coordination, check-ins, and quick updates.
+- **Guidely Copilot Dashboard**: For indexing, querying documents, and auditing performance telemetry.
+- **Code Repositories**: For PR comments, code reviews, and visual layout discussions.
+
+## 4. Collaborative Core Hours
+To facilitate cross-functional collaboration while respecting individual work schedules, we maintain standard collaboration hours:
+- Core hours are scheduled daily from **10:00 AM to 3:00 PM EST**.
+- During these hours, teams are expected to be available for sync meetings, design reviews, and pair-programming sessions.
+- Outside of core hours, you have full flexibility to manage your time and output.
+
+## 5. Global Locations
+Guidely has physical collaboration hubs in London, San Francisco, Dubai, and Singapore. Team members are welcome to work from any of these offices at any time. Badge access is coordinated through the corporate security office. Each hub is equipped with high-speed fiber internet, private developer booths, and catered snack areas.

@@ -1,13 +1,22 @@
-Guidely Remote Work FAQ
+# Guidely Internal Frequently Asked Questions (FAQ)
 
-Q: What are the core hours?
-A: Our core hours are 10:00 AM to 4:00 PM EST. All employees are expected to be available for collaboration during this period.
+## Q: What are the core collaboration hours?
+A: Our core collaboration hours are from **10:00 AM to 3:00 PM EST** daily. During these hours, teams are expected to be available online for meetings, reviews, and syncs. Outside this range, you can manage your work hours autonomously.
 
-Q: Can I work from another country?
-A: You can work remotely from another country for up to 30 days per calendar year. You must inform HR and obtain manager approval.
+## Q: How do I request a travel reimbursement?
+A: Travel reimbursements must be submitted through the corporate expense portal. You must upload itemized receipts for meals, accommodation, and transport. The daily limit for meals is **$75 USD**.
 
-Q: Is there an internet stipend?
-A: Yes, remote employees receive a monthly stipend of $50 for home internet bills. Submit your invoice through the expense portal.
+## Q: What files can be uploaded to the Knowledge Base?
+A: The Guidely copilot supports plain text files (`.txt`), Markdown files (`.md`), and JSON files (`.json`). PDF and word documents must be converted to plain text format before ingestion.
 
-Q: How do I request equipment?
-A: Submit a ticket in the IT Helpdesk under 'Hardware Request'. Standard equipment includes a laptop, monitor, keyboard, and mouse.
+## Q: How does the embedding cache work?
+A: When a document chunk or query is processed, we calculate its cryptographic checksum. Before calling external APIs (like OpenAI or Gemini), we check if this checksum exists in the `embedding_cache` database table. If it does, we return the cached vector. This achieves **100% cache hits** for unchanged resources and saves significant API costs.
+
+## Q: What should I do if the API server is offline?
+A: If the API server health indicator shows "Offline" in the UI:
+1. Verify that your FastAPI backend is running at `http://localhost:8000`.
+2. Check your `.env` file to ensure the API keys are correct.
+3. Inspect `backend/data/db/guidely.db` write permissions.
+
+## Q: Where is the vector database stored?
+A: Guidely uses a local FAISS index file. It is serialized to disk in the `backend/data/vector_store/index.faiss` directory. Mappings back to the SQLite chunks are saved in `mappings.json` inside the same folder.
