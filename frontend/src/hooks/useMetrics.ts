@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { SystemMetrics } from '../types/api';
+import type { SystemMetrics } from '../types/api';
 import api from '../services/api';
 
 export function useMetrics() {

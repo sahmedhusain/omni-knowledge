@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Document } from '../types/api';
+import type { Document } from '../types/api';
 import api from '../services/api';
 
 export function useDocuments() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, FileText, BarChart2, Activity, Database, AlertCircle } from 'lucide-react';
+import { Search, FileText, BarChart2, Activity, Database } from 'lucide-react';
 import { useMetrics } from '../hooks/useMetrics';
 
 interface LayoutProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SystemMetrics } from '../types/api';
+import type { SystemMetrics } from '../types/api';
 import { Database, FileText, Activity, AlertOctagon, Award, CheckCircle } from 'lucide-react';
 import GlassCard from './GlassCard';
 

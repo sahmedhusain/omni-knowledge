@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface GlassCardProps {
+interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
@@ -12,6 +12,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   className = '',
   onClick,
   glow = false,
+  ...props
 }) => {
   return (
     <div
@@ -22,6 +23,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       style={{
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
+      {...props}
     >
       {children}
     </div>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { SearchResponse, Source } from '../types/api';
+import { useState } from 'react';
+import type { SearchResponse } from '../types/api';
 import { Zap, Clock, FileText, CheckCircle2, ChevronRight } from 'lucide-react';
 import GlassCard from './GlassCard';
 

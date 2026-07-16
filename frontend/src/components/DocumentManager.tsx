@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDocuments } from '../hooks/useDocuments';
-import { Upload, Trash2, RefreshCw, FileText, AlertCircle, CheckCircle, HelpCircle } from 'lucide-react';
+import { Upload, Trash2, RefreshCw, FileText, AlertCircle, CheckCircle } from 'lucide-react';
 import GlassCard from './GlassCard';
 
 export const DocumentManager: React.FC = () => {

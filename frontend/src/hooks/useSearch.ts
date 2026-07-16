@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { SearchResponse } from '../types/api';
+import type { SearchResponse } from '../types/api';
 import api from '../services/api';
 
 export function useSearch() {
