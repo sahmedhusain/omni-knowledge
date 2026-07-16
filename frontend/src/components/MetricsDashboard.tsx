@@ -1,6 +1,6 @@
 import React from 'react';
 import type { SystemMetrics } from '../types/api';
-import { Database, FileText, Activity, AlertOctagon, Award, CheckCircle } from 'lucide-react';
+import { Database, FileText, Activity, AlertOctagon, Award, Clock, CheckCircle } from 'lucide-react';
 import GlassCard from './GlassCard';
 
 interface MetricsDashboardProps {
@@ -10,7 +10,6 @@ interface MetricsDashboardProps {
 export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) => {
   const { counts, latency, query_cache, embedding_cache, failures, indexing } = metrics;
 
-  // Donut chart path setup (r=36, circumference=226.2)
   const getDonutStyle = (rate: number) => {
     const circ = 226.2;
     const offset = circ - (rate * circ);
@@ -21,78 +20,87 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
     };
   };
 
-  const getMetricGrade = (latencyMs: number, cacheRate: number) => {
-    if (latencyMs < 1000 && cacheRate > 0.9) return { grade: 'A+', color: 'text-violet-400' };
-    if (latencyMs < 2000 && cacheRate > 0.7) return { grade: 'A', color: 'text-emerald-400' };
-    if (latencyMs < 3000 && cacheRate > 0.5) return { grade: 'B', color: 'text-amber-400' };
+  const getHealthGrade = (latencyMs: number, cacheRate: number) => {
+    if (latencyMs < 1200 && cacheRate > 0.85) return { grade: 'A+', color: 'text-violet-400' };
+    if (latencyMs < 2000 && cacheRate > 0.70) return { grade: 'A', color: 'text-emerald-400' };
+    if (latencyMs < 3000 && cacheRate > 0.50) return { grade: 'B', color: 'text-amber-400' };
     return { grade: 'C', color: 'text-rose-400' };
   };
 
-  const performance = getMetricGrade(latency.median_ms, embedding_cache.hit_rate);
+  const status = getHealthGrade(latency.median_ms, embedding_cache.hit_rate);
 
   return (
-    <div className="flex flex-col gap-6 text-left">
-      {/* Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Grade Card */}
-        <GlassCard className="p-5 flex items-center justify-between border-slate-800">
+    <div className="flex flex-col gap-6 text-left animate-fade-in">
+      {/* Overview stats cards grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Core grade stats */}
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
           <div>
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">
-              System Health Grade
+            <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
+              Performance Grade
             </span>
-            <h3 className={`font-heading text-4xl font-black mt-1 ${performance.color}`}>
-              {performance.grade}
+            <h3 className={`font-heading text-4xl font-black mt-1 ${status.color}`}>
+              {status.grade}
             </h3>
           </div>
-          <Award size={36} className="text-slate-600/40" />
+          <div className="w-12 h-12 rounded-xl bg-violet-600/[0.05] border border-violet-500/10 flex items-center justify-center">
+            <Award size={22} className="text-violet-400" />
+          </div>
         </GlassCard>
 
         {/* Total Documents */}
-        <GlassCard className="p-5 flex items-center justify-between border-slate-800">
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
           <div>
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">
+            <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Indexed Documents
             </span>
             <h3 className="font-heading text-4xl font-bold text-slate-200 mt-1">
               {counts.docs}
             </h3>
           </div>
-          <FileText size={36} className="text-slate-600/40" />
+          <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
+            <FileText size={22} className="text-slate-400" />
+          </div>
         </GlassCard>
 
-        {/* Total Chunks */}
-        <GlassCard className="p-5 flex items-center justify-between border-slate-800">
+        {/* Vector chunks */}
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
           <div>
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">
+            <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Vector Segments
             </span>
             <h3 className="font-heading text-4xl font-bold text-slate-200 mt-1">
               {counts.chunks}
             </h3>
           </div>
-          <Database size={36} className="text-slate-600/40" />
+          <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
+            <Database size={22} className="text-slate-400" />
+          </div>
         </GlassCard>
 
-        {/* Queries Served */}
-        <GlassCard className="p-5 flex items-center justify-between border-slate-800">
+        {/* Total served requests */}
+        <GlassCard className="p-5 flex items-center justify-between border-white/[0.04]">
           <div>
-            <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">
+            <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider block">
               Queries Served
             </span>
             <h3 className="font-heading text-4xl font-bold text-slate-200 mt-1">
               {counts.queries}
             </h3>
           </div>
-          <Activity size={36} className="text-slate-600/40" />
+          <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/[0.04] flex items-center justify-center">
+            <Activity size={22} className="text-slate-400" />
+          </div>
         </GlassCard>
       </div>
 
-      {/* Latency and Cache Hit Rates */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Latency Metrics Card */}
-        <GlassCard className="p-6 border-slate-800">
-          <h3 className="font-heading font-bold text-sm text-slate-300 uppercase tracking-wider mb-5">
-            Query Latency Distribution
+      {/* Latency and Caches */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Latency Distribution */}
+        <GlassCard className="p-6 border-white/[0.04]">
+          <h3 className="font-heading font-extrabold text-xs text-slate-400 uppercase tracking-wider mb-5 flex items-center gap-2">
+            <Clock size={14} className="text-violet-400" />
+            Query Response Latency
           </h3>
           
           <div className="flex flex-col gap-5">
@@ -104,14 +112,13 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
                   {latency.median_ms.toFixed(0)} ms
                 </span>
               </div>
-              <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800">
-                {/* Target is 3000ms. If lower than target, render full width, else scaled */}
+              <div className="w-full bg-slate-950/80 h-2 rounded-full overflow-hidden border border-white/[0.03] p-[1px]">
                 <div 
-                  className="bg-gradient-to-r from-violet-500 to-violet-600 h-full rounded-full"
+                  className="bg-gradient-to-r from-violet-500 to-indigo-500 h-full rounded-full"
                   style={{ width: `${Math.min((latency.median_ms / 3000) * 100, 100)}%` }}
                 />
               </div>
-              <span className="text-[10px] text-slate-500 font-medium">Target: &lt; 3.0s warm cache</span>
+              <span className="text-[10px] text-slate-500 font-bold block mt-1">Target Limit: &lt; 3.0 seconds</span>
             </div>
 
             {/* P95 Latency */}
@@ -122,42 +129,41 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
                   {latency.p95_ms.toFixed(0)} ms
                 </span>
               </div>
-              <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800">
+              <div className="w-full bg-slate-950/80 h-2 rounded-full overflow-hidden border border-white/[0.03] p-[1px]">
                 <div 
-                  className="bg-gradient-to-r from-cyan-500 to-cyan-600 h-full rounded-full"
+                  className="bg-gradient-to-r from-cyan-500 to-teal-500 h-full rounded-full"
                   style={{ width: `${Math.min((latency.p95_ms / 5000) * 100, 100)}%` }}
                 />
               </div>
-              <span className="text-[10px] text-slate-500 font-medium">Target: &lt; 5.0s tail limit</span>
+              <span className="text-[10px] text-slate-500 font-bold block mt-1">Target Limit: &lt; 5.0 seconds</span>
             </div>
             
-            {/* Indexing Throughput Average */}
-            <div className="pt-4 border-t border-slate-800/60 mt-2 flex justify-between items-center text-xs font-semibold">
+            {/* Indexing throughput metric */}
+            <div className="pt-4 border-t border-white/[0.03] mt-2 flex justify-between items-center text-xs font-semibold">
               <span className="text-slate-400">Average Indexing Run Duration</span>
               <span className="font-mono text-slate-200">{indexing.avg_duration_ms.toFixed(0)} ms</span>
             </div>
           </div>
         </GlassCard>
 
-        {/* Circular Gauges for Caches */}
-        <GlassCard className="p-6 border-slate-800 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          {/* Query Cache Hit */}
+        {/* Caches Gauges card */}
+        <GlassCard className="p-6 border-white/[0.04] lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          {/* Query cache hit rate */}
           <div className="flex flex-col items-center text-center">
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
-              Query Cache Hits
+            <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-4">
+              Query Cache Hit Rate
             </h4>
             
-            {/* SVG circle */}
             <div className="relative w-28 h-28 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90">
-                <circle cx="56" cy="56" r="36" fill="transparent" stroke="#1f2028" strokeWidth="8" />
+                <circle cx="56" cy="56" r="36" fill="transparent" stroke="rgba(255,255,255,0.02)" strokeWidth="6" />
                 <circle 
                   cx="56" 
                   cy="56" 
                   r="36" 
                   fill="transparent" 
                   stroke="url(#purpleGlow)" 
-                  strokeWidth="8"
+                  strokeWidth="6"
                   strokeLinecap="round"
                   style={getDonutStyle(query_cache.hit_rate)}
                 />
@@ -172,34 +178,33 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
                 <span className="font-heading font-black text-2xl text-slate-200">
                   {(query_cache.hit_rate * 100).toFixed(0)}%
                 </span>
-                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wide">
+                <span className="text-[8px] font-bold text-slate-500 uppercase tracking-wider">
                   Hit Rate
                 </span>
               </div>
             </div>
             
-            <span className="text-[10px] text-slate-400 mt-3 font-semibold">
-              {query_cache.hits} Hits / {query_cache.hits + query_cache.misses} Total Requests
+            <span className="text-[10px] text-slate-400 mt-4 font-bold">
+              {query_cache.hits} Hits / {query_cache.hits + query_cache.misses} Queries
             </span>
           </div>
 
-          {/* Embedding Cache Hit */}
+          {/* Embedder cache hit rate */}
           <div className="flex flex-col items-center text-center">
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
-              Embedding Cache Hits
+            <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-4">
+              Embedding Cache Hit Rate
             </h4>
             
-            {/* SVG circle */}
             <div className="relative w-28 h-28 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90">
-                <circle cx="56" cy="56" r="36" fill="transparent" stroke="#1f2028" strokeWidth="8" />
+                <circle cx="56" cy="56" r="36" fill="transparent" stroke="rgba(255,255,255,0.02)" strokeWidth="6" />
                 <circle 
                   cx="56" 
                   cy="56" 
                   r="36" 
                   fill="transparent" 
                   stroke="url(#cyanGlow)" 
-                  strokeWidth="8"
+                  strokeWidth="6"
                   strokeLinecap="round"
                   style={getDonutStyle(embedding_cache.hit_rate)}
                 />
@@ -214,45 +219,45 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({ metrics }) =
                 <span className="font-heading font-black text-2xl text-slate-200">
                   {(embedding_cache.hit_rate * 100).toFixed(0)}%
                 </span>
-                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wide">
+                <span className="text-[8px] font-bold text-slate-500 uppercase tracking-wider">
                   Hit Rate
                 </span>
               </div>
             </div>
             
-            <span className="text-[10px] text-slate-400 mt-3 font-semibold">
+            <span className="text-[10px] text-slate-400 mt-4 font-bold">
               {embedding_cache.hits} Hits / {embedding_cache.hits + embedding_cache.misses} API Calls
             </span>
           </div>
         </GlassCard>
       </div>
 
-      {/* Failures and Error log metrics */}
-      <GlassCard className="p-6 border-slate-800">
-        <h3 className="font-heading font-bold text-sm text-slate-300 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <AlertOctagon size={16} className="text-slate-500" />
-          Pipeline Failures Log ({failures.total})
+      {/* Failure logs analysis card */}
+      <GlassCard className="p-6 border-white/[0.04]">
+        <h3 className="font-heading font-bold text-xs text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <AlertOctagon size={14} className="text-slate-500" />
+          Active Exceptions Logs ({failures.total})
         </h3>
         
         {failures.total === 0 ? (
-          <div className="py-6 text-center text-slate-500 flex flex-col items-center">
-            <CheckCircle size={32} className="text-emerald-500/40 mb-2" />
-            <p className="font-semibold text-sm">System functioning normally.</p>
-            <p className="text-xs mt-0.5">No API errors, missing keys, or timeouts logged in the session.</p>
+          <div className="py-6 text-center text-slate-600 flex flex-col items-center">
+            <CheckCircle size={32} className="text-emerald-500/20 mb-2" />
+            <p className="font-heading font-extrabold text-sm text-slate-400 uppercase tracking-wider">0 Errors Logged</p>
+            <p className="text-xs text-slate-500 font-semibold mt-0.5">System operations functioning normally.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            {Object.entries(failures.by_type).map(([errType, count]) => (
+            {Object.entries(failures.by_type).map(([type, count]) => (
               <div 
-                key={errType}
-                className="flex justify-between items-center bg-slate-900/35 border border-slate-800/80 p-3.5 rounded-xl text-xs font-semibold text-slate-300"
+                key={type}
+                className="flex justify-between items-center bg-slate-950/40 border border-white/[0.03] p-3.5 rounded-xl text-xs font-semibold text-slate-300"
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-rose-500" />
-                  <span className="font-mono text-slate-200">{errType}</span>
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                  <span className="font-mono text-slate-200">{type}</span>
                 </div>
-                <span className="px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/10">
-                  {count} occurrences
+                <span className="px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/10 text-[10px] font-bold uppercase tracking-wider">
+                  {count} errors
                 </span>
               </div>
             ))}
