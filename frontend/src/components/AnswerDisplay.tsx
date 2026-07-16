@@ -23,10 +23,10 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
           <button
             key={i}
             onClick={() => exists && setSelectedSource(sourceIndex)}
-            className={`mx-1 inline-flex items-center justify-center w-5 h-5 text-[9px] font-black rounded-md transition-all duration-150 align-baseline ${
+            className={`mx-0.5 inline-flex items-center justify-center w-5 h-5 text-[9px] font-bold rounded-md transition-all duration-150 align-baseline cursor-pointer ${
               selectedSource === sourceIndex 
-                ? 'bg-violet-500 text-white shadow-lg shadow-violet-500/20' 
-                : 'bg-white/[0.04] border border-white/[0.06] text-violet-400 hover:bg-violet-600 hover:text-white'
+                ? 'bg-violet-accent text-white shadow-lg shadow-violet-500/20' 
+                : 'bg-white/[0.03] border border-white/[0.06] text-violet-accent hover:bg-violet-accent hover:text-white'
             }`}
             title={exists ? `Source: ${sources[sourceIndex].filename}` : 'Source'}
           >
@@ -39,13 +39,13 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-in text-left">
+    <div className="flex flex-col gap-5 animate-fade-in text-left">
       {/* Answer Block */}
       <GlassCard className="p-6 relative border-white/[0.04] shadow-2xl">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-violet-500/5 to-cyan-500/5 blur-[80px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-violet-accent/5 to-cyan-accent/5 blur-[80px] pointer-events-none" />
         
         {/* Metric metadata bar */}
-        <div className="flex justify-between items-center mb-5 pb-3.5 border-b border-white/[0.03]">
+        <div className="flex justify-between items-center mb-5 pb-3 border-b border-white/[0.03]">
           <div className="flex items-center gap-2">
             <CheckCircle2 size={16} className="text-violet-400" />
             <span className="font-heading font-extrabold text-xs uppercase tracking-wider text-slate-300">
@@ -55,12 +55,12 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
           
           <div className="flex items-center gap-2.5 text-[10px] font-bold">
             {cache_hit && (
-              <span className="flex items-center gap-1 text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/10 uppercase tracking-wide">
+              <span className="flex items-center gap-1 text-emerald-accent bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/10 uppercase tracking-wide">
                 <Zap size={10} />
                 Cached Vector
               </span>
             )}
-            <span className="flex items-center gap-1 text-slate-400 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded">
+            <span className="flex items-center gap-1 text-slate-400 bg-slate-900 border border-slate-800/80 px-2 py-0.5 rounded">
               <Clock size={10} />
               {(latency_ms / 1000).toFixed(2)}s Latency
             </span>
@@ -79,16 +79,16 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
           Source Documents Referenced
         </p>
         
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-3.5">
           {sources.map((src, idx) => {
             const isSelected = selectedSource === idx;
             return (
               <GlassCard
                 key={idx}
                 onClick={() => setSelectedSource(isSelected ? null : idx)}
-                className={`p-5 transition-all duration-300 border flex flex-col gap-3 relative overflow-hidden ${
+                className={`p-4 transition-all duration-300 border flex flex-col gap-3 relative overflow-hidden ${
                   isSelected
-                    ? 'border-violet-500/50 bg-violet-950/10 shadow-lg shadow-violet-500/5'
+                    ? 'border-violet-accent/50 bg-violet-accent/[0.02] shadow-lg shadow-violet-500/5'
                     : 'border-white/[0.04] hover:border-white/[0.08]'
                 }`}
               >
@@ -96,7 +96,7 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
                   <div className="flex items-center gap-3">
                     <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-black font-heading border transition-colors ${
                       isSelected 
-                        ? 'bg-violet-500 border-violet-400 text-white' 
+                        ? 'bg-violet-accent border-violet-400 text-white' 
                         : 'bg-white/[0.02] border-white/[0.06] text-slate-400'
                     }`}>
                       {idx + 1}
@@ -107,7 +107,7 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
                         {src.filename}
                       </h4>
                       {src.tag && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/10 uppercase tracking-wide inline-block mt-0.5">
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-violet-accent/10 text-violet-400 border border-violet-500/10 uppercase tracking-wide inline-block mt-0.5">
                           {src.tag}
                         </span>
                       )}
@@ -124,8 +124,8 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ response }) => {
 
                 {/* Snippet expand with slide down effect */}
                 {isSelected && (
-                  <div className="mt-2 pt-3.5 border-t border-white/[0.04] w-full animate-fade-in">
-                    <p className="text-xs font-mono font-medium text-slate-300 bg-slate-950/80 p-4 rounded-xl border border-white/[0.03] leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-56 overflow-y-auto">
+                  <div className="mt-2 pt-3.5 border-t border-white/[0.03] w-full animate-fade-in">
+                    <p className="text-xs font-mono font-medium text-slate-300 bg-slate-950/80 p-4 rounded-xl border border-white/[0.02] leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-56 overflow-y-auto">
                       {src.content}
                     </p>
                   </div>
