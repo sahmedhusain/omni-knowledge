@@ -1,19 +1,41 @@
-# Guidely Employee Frequently Asked Questions (FAQ)
+# GUIDELY INC. FREQUENTLY ASKED QUESTIONS (FAQ)
 
-## Q: When is the monthly pay schedule?
-A: Salaries are processed and deposited directly into your bank account on the **25th of every month**. If the 25th falls on a weekend or public holiday, payments are made on the preceding business day.
+## Section 1: HR, Payroll, and Tax FAQs
+**Q: What is the monthly payroll schedule?**
+A: Salaries are processed and deposited directly into your bank account on the **25th of every month**. If the 25th falls on a weekend or public holiday, payments are processed on the preceding business day. You can download your monthly pay slips from the employee portal.
 
-## Q: How do I request vacation time?
-A: Annual leave requests must be submitted through our HR Portal at least two weeks in advance. Once your manager approves the request, the days will be deducted from your yearly vacation balance.
+**Q: How do I update my tax withholding or direct deposit details?**
+A: You can update your tax documents (W-4 or regional equivalents) and banking details directly in the HR portal under 'Payment Settings'. Updates submitted before the 15th of the month will apply to that month's payroll cycle.
 
-## Q: What is the daily expense reimbursement cap?
-A: For approved business travel, the daily reimbursement cap for meals is **$75 USD**. Itemized receipts are required for all transactions above $25 USD.
+**Q: Are bonuses paid out on a separate schedule?**
+A: Annual and quarterly performance bonuses are evaluated and paid out in the payroll cycle immediately following the evaluation period. For example, Q1 performance bonuses are paid out on April 25th.
 
-## Q: Where do I get office parking access?
-A: Parking passes are managed by the Facilities Team. New employees can request a monthly parking sticker during their first week. Spots are available on a first-come, first-served basis in the basement garage.
+## Section 2: Leaves, Vacation, and Absences
+**Q: How do I request annual vacation leave?**
+A: Annual leave requests must be submitted through the HR portal at least two weeks in advance. Once your manager approves the request, the days will be deducted from your yearly vacation balance.
 
-## Q: What software tools are approved for client communications?
-A: Guidely approved tools for client engagements are Zoom, Slack, and email. Any other communication tool must receive approval from the IT Security Team prior to client contact.
+**Q: What is the carryover policy for unused vacation days?**
+A: Employees can carry over up to 5 unused vacation days into the next calendar year. Any additional unused days beyond 5 will expire on December 31st.
 
-## Q: How do I access the office outside business hours?
-A: Your corporate badge is configured for 24/7 access to all regional hubs. If you experience badge errors, contact the Security desk or email `security@guidely.com`.
+**Q: What should I do if I am sick and cannot work?**
+A: If you are unable to work due to illness, notify your team lead via Slack before 9:00 AM local time. Record the day as 'Sick Leave' in the HR portal. A medical certificate is required for sick leave exceeding 3 consecutive days.
+
+## Section 3: Expenses, Travel, and Reimbursements
+**Q: What is the daily expense reimbursement cap during business travel?**
+A: For approved corporate travel, the daily reimbursement cap for meals is **$75 USD**. Lodging is capped at **$200 USD per night**. Itemized receipts are required for all transactions above $25 USD.
+
+**Q: How do I book corporate travel?**
+A: All flights, trains, and hotel accommodations must be booked through our approved corporate travel agency portal. This ensures that travel bookings are billed directly to the company.
+
+**Q: When are monthly expense claims due?**
+A: Expense reports must be submitted through the portal within 30 days of incurring the expense or returning from business travel. Reimbursements are processed on the 10th of the following month.
+
+## Section 4: IT, Security, and Workstation Support
+**Q: What should I do if my security badge stops working?**
+A: If your office security badge is malfunctioning or lost, visit the office reception desk during business hours or email `security@guidely.com` to request a replacement badge.
+
+**Q: How do I reset my system account password?**
+A: You can reset your system password using the self-service portal. If your account is locked, submit a support request in the `#help-it` Slack channel or email IT support.
+
+**Q: Can I use personal devices for company work?**
+A: No. To protect client confidentiality and comply with security audits, all work must be performed on company-issued laptops. Personal phones may be used for corporate Slack and Gmail, provided they are managed by the company's mobile device manager.

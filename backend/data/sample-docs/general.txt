@@ -1,18 +1,24 @@
-# Guidely Corporate Profile and Business Overview
+# GUIDELY INC. GENERAL CORPORATE HANDBOOK
 
-## 1. Executive Summary
-Guidely Inc. is a leading global corporate solutions provider specializing in business process optimization, organizational consulting, and knowledge management services. Since our founding, we have assisted over 500 enterprise clients in streamlining their operations, improving internal communications, and maximizing team productivity. Our primary objective is to make complex corporate information simple, accessible, and actionable.
+## Section 1: Introduction and Corporate History
+Welcome to Guidely Inc., a premier global management consulting and corporate operations advisory firm. Founded in 2018 by a group of industry leaders, Guidely was established with a singular, powerful objective: to simplify corporate knowledge infrastructure. In the modern business world, companies suffer from information overload, causing decision paralysis, onboarding delays, and communication breakdowns. Guidely partners with enterprise corporations to analyze their internal data pipelines, standardize their operational playbooks, and implement natural language search models to make organizational data instantly discoverable. Over the past decade, we have expanded from a boutique firm in New York to a global enterprise with regional hubs in London, Singapore, Dubai, and Sydney. We believe that clarity is the ultimate competitive advantage, and our mission is to deliver that clarity to every client we serve.
 
-## 2. Our Core Business Services
-Guidely delivers client value across three strategic business units:
-- **Strategic Advisory**: We partner with executive teams to design organizational structures that promote speed, transparency, and collaboration.
-- **Operations Consulting**: We audit workflow bottlenecks, document procedures, and build internal knowledge frameworks.
-- **Corporate Training**: We design and implement interactive training courses to align client staff with new processes.
+## Section 2: Global Business Services Portfolio
+Guidely delivers client value across four core strategic consulting divisions, each tailored to address critical dimensions of enterprise operations:
+- **Strategic Advisory Practice**: We collaborate directly with executive boards and management teams to design agile organizational structures. This includes restructuring departments, optimizing reporting hierarchies, and formulating long-term business strategy maps that align with modern hybrid-work realities.
+- **Operations Consulting Practice**: We perform comprehensive workflow audits, map undocumented procedures, and construct custom knowledge databases. Our consultants specialize in identifying bottlenecks in administrative processes and replacing them with efficient, standardized playbooks.
+- **Digital Transformation Advisory**: We assist legacy corporations in migrating their knowledge management systems and customer relationship platforms to modern cloud infrastructures. This includes coordinating CRM system integrations (such as Salesforce), database structures, and internal collaboration software suites.
+- **Risk and Compliance Consulting**: We evaluate corporate compliance with international data privacy frameworks (such as GDPR, CCPA, and HIPAA). We design protocols that secure sensitive information while ensuring that day-to-day operations remain fluid and unhindered.
 
-## 3. Organizational Values
-- **Integrity First**: We maintain the highest standards of professional ethics in all client engagements and internal practices.
-- **Clarity and Simplicity**: We strip away unnecessary complexity and jargon, focusing on clear, plain-language solutions.
-- **Client Empowerment**: We build structures that enable our clients to operate independently and successfully long after our engagement ends.
+## Section 3: Values, Culture, and Brand Standards
+At Guidely, our culture is defined by our dedication to professional excellence and client success. We hold ourselves to three foundational values:
+- **Integrity First**: We operate with complete transparency. We never recommend a change that does not directly contribute to the client's operational health, and we hold ourselves to the highest ethical standard in all client communications and billing practices.
+- **Simplicity over Jargon**: We strip away unnecessary corporate speak and acronyms. Our deliverables, guides, and reports are written in clear, plain language that anyone in the organization can understand and act upon.
+- **Autonomy and Trust**: We believe that highly talented professionals perform best when given the autonomy to drive their own outcomes. We trust our consultants, engineers, and designers to lead client engagements and manage their schedules responsibly.
+- **Brand Standards**: The Guidely name represents quality and clarity. When presenting to clients, all documentation must adhere to our corporate brand guidelines, using standard typography (Plus Jakarta Sans and Outfit), cohesive dark slate color schemes, and clean, professional formatting.
 
-## 4. Business Operations and Hubs
-Guidely operates on a hybrid model with major regional headquarters in New York, London, and Singapore. Our client services teams are distributed globally, ensuring 24/7 support for international enterprise accounts. All office facilities are designed to foster collaboration and focus, equipped with modern meeting rooms and client reception areas.
+## Section 4: Operational Framework and Communication
+Guidely is a remote-first, hybrid company. To coordinate collaboration across our global offices, we adhere to the following guidelines:
+- **Core Collaboration Hours**: Daily synchronizations, team alignments, and client review meetings are scheduled between **10:00 AM and 3:00 PM EST**. All employees are expected to be online and available during these hours. Outside of core hours, you have complete schedule flexibility.
+- **Communication Channels**: We use Slack for instant team discussions, email for official corporate agreements, Zoom for virtual presentations, and Google Drive for collaborative document storage.
+- **Global Offices**: Our physical collaboration hubs in New York, London, and Singapore are open 24/7 to all employees. Access is managed via corporate security badges. Each office features dedicated focus booths, meeting spaces, and dining amenities.

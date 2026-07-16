@@ -1,23 +1,37 @@
-# Guidely Corporate HR Onboarding Guide
+# GUIDELY INC. EMPLOYEE ONBOARDING HANDBOOK
 
-## Welcome to Guidely Inc.!
-We are thrilled to welcome you to our growing team. This guide outlines your onboarding roadmap, benefit enrollments, and first-week priorities.
+## Section 1: Welcome and Day 1 Priorities
+Welcome to the Guidely family! We are thrilled to have you join our team of world-class consultants, engineers, and operational professionals. Your first week is designed to integrate you into our business processes, provision your workstation, configure your systems access, and align you with your team's objectives.
+On your first day, your primary focus should be:
+1. **HR Orientation**: Attend the virtual orientation session at 10:00 AM EST to meet the HR team and review company history.
+2. **Payroll Setup**: Complete your tax documentation, direct deposit forms, and identity verification in the employee portal.
+3. **Hardware Check**: Confirm receipt of your company-issued laptop and peripherals, and set up your initial login credentials.
+4. **IT Alignment**: Schedule your 1-on-1 setup session with the IT support desk to configure system accounts and VPN access.
 
-## First Week Checklist
-- **Day 1**: Attend the HR orientation session, complete tax and payroll documentation, and receive your corporate ID card.
-- **Day 2**: Meet your team lead, set up your email and communication accounts, and join the company welcome thread.
-- **Day 3**: Review the Guidely Corporate Profile and complete the operational onboarding module.
-- **Day 4**: Review your quarterly deliverables and schedule your first 1-on-1 alignment check-in.
-- **Day 5**: Complete your benefits enrollment form (health, dental, and retirement options).
+## Section 2: Week 1 Onboarding Roadmap
+Your first week is structured around key milestones to ensure you feel supported and equipped to succeed:
+- **Day 2 (Systems Setup)**: Log in to your corporate Gmail account, join the primary Slack channels, and set up your profile. Meet your team lead for an initial projects overview and expectations mapping.
+- **Day 3 (Operational Training)**: Complete the operational guidelines training module in the employee learning portal. Review current client deliverables, project files, and the Guidely General Corporate Handbook.
+- **Day 4 (First Deliverable)**: Shadow a team member in a client sync meeting or assist in compiling operational reports. Set your quarterly KPIs with your manager and configure your Asana boards.
+- **Day 5 (Benefits and Wrap-up)**: Complete your benefits enrollment selections (health, dental, vision, and retirement matching plans). Attend the Friday team wrap-up social hour.
 
-## Corporate Systems Account Configuration
-During your first 48 hours, IT will assist you in configuring your access to our primary business applications:
-1. **Corporate Email & Calendar**: Access your mail and schedule through Gmail using your `@guidely.com` address.
-2. **Internal Communication**: Join our Slack channels to collaborate with team members across New York, London, and Singapore.
-3. **Client CRM Platform**: Operations team members will receive logins for Salesforce to manage active consulting leads.
+## Section 3: Workstation Provisioning and IT Security
+Every Guidely employee is provided with a standard-issue MacBook Pro. During your initial system setup, you must adhere to the following IT regulations:
+- **System Credentials**: Use a strong password (minimum 12 characters, including numbers and symbols) for your local system login. Set up Apple Touch ID for fast, secure system unlocking.
+- **Operating System Updates**: You are required to install system security updates within 48 hours of release. The IT team audits compliance logs automatically.
+- **Security Tools**: Ensure the corporate-managed antivirus and firewall configurations remain active. Do not download or install unapproved software applications.
+- **Lost or Stolen Hardware**: If your laptop is lost or stolen, you must report it immediately to `security@guidely.com` so the device can be remotely locked and wiped to protect client confidentiality.
 
-## Benefits and Perks Enrollment
-Guidely provides a premium benefits package to support our employees:
-- **Health and Dental Insurance**: Full coverage plans are available for employees and their immediate families.
-- **Retirement Planning**: Guidely offers a 401(k) matching program where the company matches up to 4% of your contributions.
-- **Wellness Allowance**: Employees are eligible for a monthly reimbursement of $50 USD to cover gym memberships or wellness apps.
+## Section 4: Communication and Systems Configuration
+To collaborate effectively with team members across New York, London, and Singapore, configure your corporate accounts as follows:
+- **Corporate Email**: Access your mail and calendar via Google Workspace using your `@guidely.com` address. Keep your calendar availability up to date.
+- **Slack Directories**: Join key channels: `#announcements` for corporate news, `#help-it` for system support, and your specific department channels (e.g. `#ops-consulting`, `#strategic-advisory`).
+- **Salesforce CRM Access**: Operations and sales consultants will receive CRM credentials. Complete the Salesforce client logging module before accessing active customer accounts.
+
+## Section 5: Benefits, Perks, and Leave Enrollment
+Guidely provides a comprehensive employee benefits program:
+- **Healthcare Coverage**: We offer premium medical, dental, and vision insurance options. Employees can choose between PPO and HDHP plans during their first week.
+- **Retirement Matching**: Guidely provides a 401(k) retirement matching program. The company matches up to 4% of your pre-tax contributions dollar-for-dollar.
+- **Home Office Allowance**: All remote and hybrid employees receive a annual workspace allowance of **$500 USD** to purchase ergonomic office furniture, monitors, or keyboards.
+- **Wellness Program**: Claim up to $50 USD per month for gym memberships, wellness classes, or health apps. Submit receipt files through the expense portal.
+- **Annual Vacation Leave**: Employees receive 20 days of paid vacation per calendar year, accrued monthly. Submit leave requests through the HR portal.

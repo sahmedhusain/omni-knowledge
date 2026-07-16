@@ -1,28 +1,36 @@
-# Guidely Corporate Operations Technical Guidelines
+# GUIDELY INC. CORPORATE OPERATIONS TECHNICAL GUIDELINES
 
-This document outlines the standard operating procedures and technical resources utilized by Guidely employees in client service and corporate administration roles.
+This document outlines the standard operational workflows, information security standards, and IT system structures utilized by Guidely employees in client service and corporate administration.
 
-## 1. Client Database and CRM (Salesforce)
-We use Salesforce to manage our customer relations, advisory leads, and historical contract data.
-- **Data Input**: Operations staff must log every client call and project status change within 24 hours.
-- **Reporting**: Weekly sales funnel reports are compiled automatically on Friday afternoons.
-- **Access Control**: Logins are secured via single sign-on (SSO) and require multi-factor authentication (MFA).
+## Section 1: Customer Relationship Management (CRM) Procedures
+We use Salesforce as our central CRM system to manage client engagements, sales funnels, and advisory deliverables.
+- **Engagement Logs**: All client calls, project updates, and milestone completions must be logged in the client's Salesforce record within 24 hours of the interaction.
+- **Lead Qualification**: New consulting leads are qualified based on client size, project complexity, and operational fit. Log all details in the lead record.
+- **Reporting Metrics**: Regional team leads compile weekly sales funnel performance charts on Friday afternoons. Ensure all records are up to date.
+- **Access Control**: Salesforce access is secured via corporate single sign-on (SSO) and requires multi-factor authentication (MFA).
 
-## 2. File Organization and Cloud Storage
-Guidely utilizes secure corporate Google Drive folders to store project deliverable assets:
-- **Directory Naming**: Always use the format `[Client Name] - [Project Name] - [Year]` for root client directories.
-- **Sensitive Folders**: Place client financials and salary grids inside subfolders named `Confidential_HR`.
-- **Retention**: Active project assets are archived to offline servers 12 months after project completion.
+## Section 2: Information Classification and File Organization
+Guidely maintains structured Google Drive repositories to organize client files and internal operational deliverables:
+- **Directory Structure**: Client files must be organized in folders using the standard format: `[Client Name] - [Project Name] - [Year]`.
+- **Classification Levels**: Files must be classified into three categories:
+  - *Public*: Standard marketing materials and corporate overviews.
+  - *Internal*: Shared methodologies, generic project playbooks, and templates.
+  - *Confidential*: Client financials, project strategy guides, and payroll structures.
+- **Access Settings**: Confidential folders must be restricted to active team members. Never share links with external email addresses without security approval.
+- **Data Retention**: Project files are archived to secure offline storage 12 months after completion and deleted after 5 years.
 
-## 3. IT Security and Workstation Protection
-To comply with global data safety regulations, all corporate laptops must follow these protocols:
-- **Operating System Updates**: Ensure security patches are installed within 48 hours of prompt.
-- **Password Complexity**: Passwords must be at least 12 characters long and changed every 90 days.
-- **Corporate VPN**: The Guidely secure VPN must be active whenever accessing internal files from home or public networks.
+## Section 3: IT Security and Workstation Compliance
+To protect company networks and satisfy compliance audits, all employees must adhere to these workstation guidelines:
+- **Operating System Patches**: You must install system security updates within 48 hours of prompt.
+- **Password Complexity**: Passwords must be at least 12 characters long, containing uppercase letters, numbers, and special characters. Passwords must be updated every 90 days.
+- **Corporate VPN**: The corporate secure VPN must be active whenever accessing internal systems, databases, or client folders from home or public networks.
+- **Lost or Stolen Assets**: Report lost or stolen hardware immediately to `security@guidely.com` so the device can be remotely locked and wiped.
 
-## 4. Software Tool Stack for Collaboration
+## Section 4: Approved Corporate Software Directory
 Guidely provides licenses for the following approved communication and productivity utilities:
-- **Slack**: For instant messaging, department threads, and corporate announcements.
-- **Zoom**: For client presentations, sales pitches, and regional team meetings.
-- **Google Workspace**: For shared documents, project spreadsheets, and corporate slide decks.
+- **Slack**: For instant messaging, department coordination, and corporate announcement threads.
+- **Zoom**: For virtual client meetings, team alignments, and project presentations.
+- **Google Workspace**: For shared document writing, project spreadsheets, and corporate presentations.
 - **Asana**: For project checklist coordination and deliverable tracking.
+- **1Password**: For secure corporate password storage and sharing.
+- **Figma**: For design project layouts and presentation assets mockups.

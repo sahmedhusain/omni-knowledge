@@ -1,20 +1,27 @@
-# Guidely Corporate Policies and Employee Code of Conduct
+# GUIDELY INC. OFFICIAL CORPORATE POLICIES
 
-## 1. Hybrid and Remote Work Policy
-Guidely supports a hybrid work environment. Employees have the flexibility to work from home up to 100% of the time, provided they are available during core business hours (**10:00 AM to 3:00 PM EST**) and hit their team targets. To support comfortable home setups, Guidely provides a home office allowance of **$500 USD** once per year for purchasing ergonomic furniture, external monitors, or office accessories.
+## Section 1: Remote and Hybrid Work Policy
+Guidely Inc. supports a modern, hybrid working environment that balances individual schedule flexibility with team alignment. All employees are eligible to work remotely up to 100% of the time, subject to manager approval and meeting quarterly deliverables.
+- **Core Hours Availability**: While working remotely, employees must remain online and responsive on corporate communication channels (Slack and Gmail) during core hours, defined as **10:00 AM to 3:00 PM EST** daily.
+- **Home Office Allowance**: To support ergonomic, safe home workspaces, Guidely provides a annual workspace allowance of **$500 USD** for purchasing office furniture, monitors, or keyboards. Submit purchase receipts through the expense portal.
+- **Utility Reimbursement**: Employees are eligible for a monthly stipend of $50 USD to assist with high-speed home internet and electricity expenses.
 
-## 2. Business Travel and Expense Policy
-Travel on company business must be approved by your department head. Covered expenses include:
-- **Hotels**: Lodging reimbursement is capped at **$200 USD per night**.
-- **Meals**: Food and beverage expense is capped at **$75 USD per day**.
-- **Receipts**: Itemized receipts are mandatory for all expense claims. Credit card slips are not sufficient.
-- **Reporting**: Expense reports must be submitted through the portal within 30 days of returning from travel.
+## Section 2: Expense Policy
+All travel on company business must be pre-approved by your department head and align with our client project budgets. Reimbursable expense caps are enforced as follows:
+- **Accommodation Caps**: Lodging is capped at a maximum of **$200 USD per night**, excluding taxes and local service fees. Exceptions require executive director approval.
+- **Meal Reimbursements**: The daily cap for meals (breakfast, lunch, dinner, and beverages) is **$75 USD**.
+- **Transportation**: Standard class flights, trains, and rideshares are fully covered. Car rentals must be pre-approved and limited to mid-size vehicles.
+- **Expense Reporting**: All expense claims must be accompanied by itemized receipt files and submitted within 30 days of the travel date. Credit card slips are not sufficient.
 
-## 3. Data Confidentiality and Client Privacy
-As a consulting firm, protecting client information is our top priority.
-- Never share client names, logos, or operational data on public forums or unapproved chat systems.
-- Use corporate VPNs when working from public Wi-Fi networks.
-- Lock your workstation screens whenever you step away from your desk.
+## Section 3: Data Protection and Client Confidentiality Policy
+Protecting our clients' proprietary information, business strategies, and operational data is critical to our corporate success:
+- **Confidential Information**: Never share client names, logos, financials, or meeting transcripts on public forums, personal social media, or unapproved communication channels.
+- **Secure Networking**: Employees must activate the secure corporate VPN whenever accessing internal files or database records from public networks (such as coffee shops or airports).
+- **Password Integrity**: Set up multi-factor authentication (MFA) on all corporate systems. Passwords must be updated every 90 days.
+- **Clean Desk Policy**: Ensure no sensitive documents or security badges are left visible on your desk when stepping away. Lock your workstation screens.
 
-## 4. Professional Code of Conduct
-Guidely is committed to providing a safe, inclusive, and harassment-free workplace for everyone. We hold our team members to high standards of mutual respect, professional speech, and ethical behavior during client meetings and internal discussions. Violations are audited by HR and may lead to disciplinary action.
+## Section 4: Professional Code of Conduct and Inclusion
+Guidely is dedicated to providing an inclusive, safe, and collaborative work environment:
+- **Mutual Respect**: We hold our team members to high standards of professional courtesy during client meetings, team alignments, and online discussions.
+- **Anti-Harassment**: Guidely enforces a zero-tolerance policy for harassment or discrimination of any kind based on race, gender, religion, age, or disability.
+- **Reporting Violations**: Report any code of conduct violations directly to HR or use the anonymous corporate reporting portal. HR reviews all logs and conducts audits.
