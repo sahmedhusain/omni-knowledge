@@ -1,0 +1,10 @@
+Guidely New Hire Onboarding
+
+Welcome to Guidely! We are excited to have you on the team.
+Your first week plan:
+Day 1: Set up your laptop, complete compliance paperwork, and join the team intro call.
+Day 2: Configure your development environment following the Developer Setup Guide.
+Day 3: Pair program with a buddy to get familiar with our code repositories and branching flow.
+Day 4: Pick up your first task from the backlog, create a pull request, and run it by your mentor.
+Day 5: Participate in the weekly demo meeting and celebrate your successful first week!
+Reach out to your buddy on Slack if you have any questions. Happy onboarding!

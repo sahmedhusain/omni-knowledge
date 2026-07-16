@@ -1,0 +1,19 @@
+Guidely Developer Setup Guide
+
+Follow these steps to configure your local developer environment for Guidely:
+1. Clone the project repository from GitHub.
+2. Ensure you have Node.js version 18+ and Python 3.9+ installed locally.
+3. Install backend dependencies:
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+4. Copy the environment template:
+   cp .env.template .env
+   Add your OpenAI or Gemini API keys to the newly created .env file.
+5. Launch the backend API:
+   python main.py
+6. Open a new terminal, navigate to the frontend directory, install npm packages, and run dev server:
+   cd frontend
+   npm install
+   npm run dev
+7. The application will be accessible at http://localhost:5173.

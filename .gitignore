@@ -105,7 +105,8 @@ backend/venv/
 
 # Local databases and application state
 backend/app/data/
-backend/data/
+backend/data/*
+!backend/data/sample-docs/
 *.db
 *.db-journal
 *.db-wal

@@ -1,0 +1,10 @@
+Guidely Information Security Standards
+
+To safeguard our systems, all employees must comply with these security practices:
+1. Passwords must be at least 14 characters, containing letters, numbers, and symbols.
+2. Use our corporate password manager to generate and store credentials.
+3. Multi-Factor Authentication (MFA) is mandatory for all access.
+4. Never store passwords, API tokens, or secrets in git repositories. Use environment variables.
+5. Lock your workstation whenever you walk away from your desk.
+6. Report suspicious emails or security incidents immediately to security@guidely.com.
+7. Any customer data must be encrypted in transit using HTTPS and TLS 1.3, and encrypted at rest.
