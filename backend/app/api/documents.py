@@ -156,6 +156,49 @@ async def delete_document(doc_id: int):
 async def trigger_reindexing():
     """Trigger a full system re-indexing of all uploaded files."""
     start_time = time.time()
+    
+    # Auto-seed sample-docs directory if not already present
+    import shutil
+    import os
+    if settings.SAMPLE_DOCS_DIR.exists():
+        for filename in os.listdir(settings.SAMPLE_DOCS_DIR):
+            if filename.endswith((".txt", ".md", ".json")):
+                src_path = settings.SAMPLE_DOCS_DIR / filename
+                dest_path = settings.UPLOAD_DIR / filename
+                
+                # Check if already registered
+                with get_db() as db:
+                    cursor = db.cursor()
+                    cursor.execute("SELECT id FROM documents WHERE filename = ?", (filename,))
+                    exists = cursor.fetchone()
+                    
+                if not exists:
+                    try:
+                        # Copy file to uploads folder
+                        shutil.copy2(src_path, dest_path)
+                        
+                        # Determine tag based on filename
+                        tag = filename.split(".")[0]
+                        if tag not in ["faq", "policy", "onboarding", "general", "technical"]:
+                            tag = "general"
+                            
+                        file_size = dest_path.stat().st_size
+                        now_str = datetime.now().isoformat()
+                        checksum = hashlib.md5(dest_path.read_bytes()).hexdigest()
+                        
+                        with get_db() as db:
+                            cursor = db.cursor()
+                            cursor.execute(
+                                """
+                                INSERT INTO documents (filename, checksum, size_bytes, tag, status, created_at, updated_at)
+                                VALUES (?, ?, ?, ?, 'indexed', ?, ?)
+                                """,
+                                (filename, checksum, file_size, tag, now_str, now_str)
+                            )
+                            db.commit()
+                    except Exception:
+                        pass
+
     with get_db() as db:
         cursor = db.cursor()
         cursor.execute("SELECT id, filename, tag FROM documents")

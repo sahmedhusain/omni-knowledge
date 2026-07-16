@@ -28,6 +28,24 @@ app.add_middleware(
 async def startup_event():
     # Load existing FAISS vectors and mappings
     VectorStore.load()
+    
+    # Pre-seed sample docs if database is completely empty
+    import sqlite3
+    from backend.app.config import settings
+    from backend.app.api.documents import trigger_reindexing
+    
+    try:
+        conn = sqlite3.connect(str(settings.DB_PATH))
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM documents")
+        count = cursor.fetchone()[0]
+        conn.close()
+        if count == 0:
+            print("Database is empty. Pre-seeding sample documents...")
+            await trigger_reindexing()
+            print("Pre-seeding completed successfully!")
+    except Exception as e:
+        print("Pre-seeding skipped:", str(e))
 
 # Include consolidated api router
 app.include_router(api_router)
