@@ -1,48 +1,20 @@
+@import "tailwindcss";
+
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-:root {
-  /* Premium Dark Slate and Neon Accent Colors */
-  --bg-dark-base: #060814;
-  --bg-dark-panel: #0a0e22;
-  --bg-dark-card: #0f1532;
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
+  --color-dark-base: #060814;
+  --color-dark-panel: #0a0e22;
+  --color-dark-card: #0f1532;
   
-  --color-violet: #8b5cf6;
-  --color-cyan: #06b6d4;
-  --color-rose: #f43f5e;
-  --color-emerald: #10b981;
-  --color-amber: #f59e0b;
-  
-  /* Glassmorphism Styles */
-  --glass-bg: rgba(10, 14, 34, 0.4);
-  --glass-bg-hover: rgba(15, 21, 50, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.04);
-  --glass-border-hover: rgba(255, 255, 255, 0.12);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-  
-  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --heading: 'Outfit', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-
-  font-family: var(--sans);
-  color: var(--text-main);
-  background-color: var(--bg-dark-base);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --color-violet-accent: #8b5cf6;
+  --color-cyan-accent: #06b6d4;
+  --color-rose-accent: #f43f5e;
+  --color-emerald-accent: #10b981;
 }
 
 /* Force layout limit to viewport height to avoid double scrollbars */
@@ -50,17 +22,17 @@ html, body, #root {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background-color: var(--color-dark-base);
 }
 
 body {
-  background: radial-gradient(circle at 50% 0%, #15113b 0%, var(--bg-dark-base) 80%);
-  font-size: 15px;
+  background: radial-gradient(circle at 50% 0%, #15113b 0%, var(--color-dark-base) 80%);
 }
 
-/* Custom Scrollbars */
+/* Scrollbar tweaks */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -70,99 +42,10 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-violet);
+  background: var(--color-violet-accent);
 }
 
-/* Beautiful Text Wrapping & Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--heading);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-p, span, li, td {
-  text-wrap: pretty;
-  word-break: break-word;
-}
-
-/* Reusable Glassmorphism Panels */
-.glass-panel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  box-shadow: var(--glass-shadow);
-}
-
-.glass-panel-hover:hover {
-  background: var(--glass-bg-hover);
-  border-color: var(--glass-border-hover);
-  box-shadow: 0 10px 40px 0 rgba(139, 92, 246, 0.08);
-  transform: translateY(-2px);
-}
-
-/* Form inputs styling */
-.glass-input {
-  background: rgba(6, 8, 20, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #fff;
-  font-family: var(--sans);
-  border-radius: 12px;
-  padding: 12px 16px;
-  outline: none;
-  font-size: 14px;
-}
-
-.glass-input:focus {
-  border-color: var(--color-violet);
-  box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
-  background: rgba(6, 8, 20, 0.65);
-}
-
-/* Navigation buttons & tags */
-.btn-primary {
-  background: linear-gradient(135deg, var(--color-violet) 0%, #6d28d9 100%);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-weight: 600;
-  font-family: var(--heading);
-  cursor: pointer;
-  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
-  font-size: 14px;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(139, 92, 246, 0.55);
-}
-
-.btn-primary:active {
-  transform: translateY(1px);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-main);
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-weight: 600;
-  font-family: var(--heading);
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Animations */
+/* Custom styles for animations and specific glass effects */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
