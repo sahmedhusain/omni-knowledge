@@ -16,7 +16,7 @@ export function useSearch() {
 
   useEffect(() => {
     // Load search history from local storage on mount
-    const saved = localStorage.getItem('guidely_search_history');
+    const saved = localStorage.getItem('omniknowledge_search_history');
     if (saved) {
       try {
         setHistory(JSON.parse(saved));
@@ -47,7 +47,7 @@ export function useSearch() {
       setHistory((prev) => {
         const filtered = prev.filter((h) => h !== trimmed);
         const updated = [trimmed, ...filtered].slice(0, 10);
-        localStorage.setItem('guidely_search_history', JSON.stringify(updated));
+        localStorage.setItem('omniknowledge_search_history', JSON.stringify(updated));
         return updated;
       });
     } catch (err: any) {
@@ -60,7 +60,7 @@ export function useSearch() {
 
   const clearHistory = () => {
     setHistory([]);
-    localStorage.removeItem('guidely_search_history');
+    localStorage.removeItem('omniknowledge_search_history');
   };
 
   const clearChat = () => {

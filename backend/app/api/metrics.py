@@ -76,7 +76,7 @@ async def export_query_logs():
         return StreamingResponse(
             io.BytesIO(output.getvalue().encode("utf-8")),
             media_type="text/csv",
-            headers={"Content-Disposition": "attachment; filename=guidely_query_logs.csv"}
+            headers={"Content-Disposition": "attachment; filename=omniknowledge_query_logs.csv"}
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to export CSV: {str(e)}")

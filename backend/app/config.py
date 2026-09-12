@@ -24,7 +24,7 @@ class Settings:
     DB_DIR: Path = DATA_DIR / "db"
     
     # SQLite DB File Path
-    DB_PATH: Path = DB_DIR / "guidely.db"
+    DB_PATH: Path = DB_DIR / "omniknowledge.db"
     
     # RAG Settings
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "800"))

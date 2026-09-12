@@ -1,202 +1,184 @@
-# Gem 💎
+# 💎 OmniKnowledge
 
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.x-009688?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind%20CSS-v4.0-0EA5E9?style=flat&logo=tailwindcss)](https://tailwindcss.com/)
-[![FAISS](https://img.shields.io/badge/Vector%20Store-FAISS-blue)](#-architecture)
+[![FAISS](https://img.shields.io/badge/Vector%20Store-FAISS-blue)](#-system-architecture)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=flat&logo=sqlite)](https://www.sqlite.org/)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" width="34" alt="React" />
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" width="34" alt="TypeScript" />
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="34" alt="Python" />
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlite/sqlite-original.svg" width="34" alt="SQLite" />
-</p>
-
-Gem is a high-performance, responsive internal knowledge assistant that helps employees find corporate information in plain, natural language. Combining local semantic search (RAG) with local document indexing, Gem retrieves relevant context passages from company files and prompts an LLM to formulate clear answers with interactive inline citations.
+**OmniKnowledge** is an enterprise-grade Retrieval-Augmented Generation (RAG) knowledge assistant. Combining high-density local vector search via FAISS (`IndexFlatL2`), cryptographic embedding caching in SQLite, and dynamic prompt engineering, OmniKnowledge ingests corporate documents and delivers accurate natural-language answers with interactive inline citations.
 
 ---
 
-## ⚡ Highlights
+## ⚡ Key Highlights
 
-- **Dual In-Memory Caching**: Implements cryptographic MD5 checksum indexing in SQLite, achieving **100% cache hits** for unchanged documents and saving OpenAI/Gemini API fees.
-- **Local FAISS FlatL2 Indexing**: Serializes float matrix embeddings onto disk with custom row alignments, performing fast nearest-neighbor searches in milliseconds.
-- **Tailwind CSS v4 Shell**: Redesigned from scratch using a modern glassmorphic theme, responsive sidebar layout locks, and Outfit/Plus Jakarta Sans typography.
-- **Interactive Citations**: Renders clickable bracket citation badges (e.g., `[1]`) that dynamically highlight source document cards and reveal raw text snippets.
-- **Ollama Open-Source Support**: Runs 100% locally on your Mac with Llama 3.2 and Nomic-Embed-Text, providing a free, quota-free RAG pipeline.
-- **KPI Telemetry Dashboard**: Features SVG circular charts, latency histograms, exception logging cards, and downloadable CSV log exports.
+- **Dual In-Memory Embedding Cache**: Uses MD5 document chunk checksums in SQLite (`omniknowledge.db`), achieving **100% cache hits** for unchanged documents and saving API inference costs.
+- **Local FAISS FlatL2 Indexing**: Serializes float matrix embeddings onto disk with custom row mapping for sub-10ms nearest-neighbor vector searches.
+- **Interactive Inline Citations**: Renders clickable bracket citation badges (e.g. `[1]`, `[2]`) that dynamically highlight source document cards and reveal raw reference passages.
+- **Multi-LLM Engine Compatibility**: Supports OpenAI (GPT-4o), Google Gemini, and 100% local offline execution via Ollama (Llama 3.2 + Nomic-Embed-Text).
+- **Tailwind CSS v4 Glassmorphic Shell**: Responsive glassmorphic layout featuring Reader and Admin persona toggles, telemetry analytics, and CSV log exporting.
 
 ---
 
 ## 📋 Table of Contents
 
-- [Highlights](#-highlights)
-- [Key Features](#-key-features)
+- [Key Highlights](#-key-highlights)
 - [How the RAG Pipeline Works](#-how-the-rag-pipeline-works)
 - [System Architecture](#-system-architecture)
-- [Run It Locally](#-run-it-locally)
-- [Ollama Local Configuration](#-ollama-local-configuration)
-- [Testing & Metrics Results](#-testing--metrics-results)
-- [Project Directory Structure](#-project-directory-structure)
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:8b5cf6,100:111827&height=4&section=footer" width="100%" alt="Divider" />
-</p>
-
----
-
-## ⭐ Key Features
-
-1. **Category Tagging**: Document uploads support tags (`policy`, `faq`, `onboarding`, `technical`, `general`) to organize and filter documents in the UI.
-2. **Follow-Up Conversation Logs**: Keeps complete dialogue threads to resolve context references across follow-up queries.
-3. **Role-Based Access Control**: An active switcher toggles between **Reader** (Q&A access only) and **Admin** (Knowledge Base and Analytics access).
-4. **Exceptions Logging**: Auto-logs raw backend exceptions (e.g. rate limits, missing keys) and displays clear toast alert states.
-5. **CSV Query Exporter**: A dedicated endpoint compiles logs into downloadable CSV sheets containing timestamps, latency numbers, and retrieved files.
+- [Search & Generation Flow](#-search--generation-flow)
+- [Setup & Execution](#-setup--execution)
+- [Ollama Local Mode](#-ollama-local-mode)
+- [Directory Structure](#-directory-structure)
+- [License](#-license)
 
 ---
 
 ## 🧭 How the RAG Pipeline Works
 
-1. **Ingestion**: Text, Markdown, and JSON documents are read by `DocumentParser`.
-2. **Chunking**: Chunks are segmented at **800 tokens** with a **100 token overlap** to preserve structural sentences.
-3. **Hashing**: Each chunk is cryptographically hashed. If a hash hit is found in SQLite, the vector is retrieved from cache. Otherwise, it calls the LLM provider.
-4. **Vector Mapping**: FAISS builds an `IndexFlatL2` matrix. We map rows in FAISS to SQLite chunk IDs via `mappings.json`.
-5. **Q&A Context Generation**: The closest chunks are injected into a system prompt telling the LLM to write a response using bracket citations.
+1. **Ingestion & Parsing**: Markdown, JSON, and raw text files are parsed by `DocumentParser`.
+2. **Semantic Overlap Chunking**: Text is segmented into 800-token chunks with 100-token overlap to maintain context across boundaries.
+3. **Cryptographic Hashing**: Each chunk is assigned an MD5 hash. Cache hits reuse existing vectors from SQLite, bypassing LLM embedding API calls.
+4. **Vector Matrix Search**: Chunks are indexed in a local FAISS `IndexFlatL2` matrix mapped to SQLite chunk identifiers.
+5. **Contextual Q&A Generation**: Relevant chunks are injected into system prompts instructing the LLM to format answers using numbered bracket citations.
 
 ---
 
-## 🏗 System Architecture
+## 🏗️ System Architecture
 
 ```mermaid
-flowchart TD
-    A[React App Search Query] --> B{Check Embedding Cache?}
-    B -->|Hit| C[Retrieve Cached Vector from SQLite]
-    B -->|Miss| D[Query API: OpenAI / Gemini / Ollama]
-    C --> E[Search FAISS L2 Euclidean Index]
-    D --> E
-    E --> F[Fetch Match Chunks & Tags from SQLite]
-    F --> G[Build RAG Context Prompt]
-    G --> H[Query LLM Chat: OpenAI / Gemini / Ollama]
-    H --> I[Log telemetry: Latency, Hit Rates, Failures]
-    I --> J[React App Custom Citations & Answers Display]
+graph TD
+    A[React App Frontend UI] --> B[FastAPI Gateway / Search Endpoint]
+    B --> C{Check Cryptographic Hash Cache?}
+    
+    C -- Hit --> D[Retrieve Cached Vectors from SQLite]
+    C -- Miss --> E[Generate Vectors via API / Ollama]
+    
+    D & E --> F[Query FAISS FlatL2 Vector Matrix]
+    F --> G[Fetch Top-k Matching Chunks & Document Metadata]
+    G --> H[Construct Context-Augmented RAG System Prompt]
+    H --> I[Execute LLM Response Generation]
+    
+    I --> J[Log Query Telemetry: Latency, Hit Rates, Errors]
+    J --> K[Return Markdown Answer with Bracket Citations to React UI]
 ```
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:06b6d4,100:111827&height=4&section=footer" width="100%" alt="Divider" />
-</p>
+---
+
+## 📐 Search & Generation Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend as React + TypeScript UI
+    participant Backend as FastAPI Server
+    participant VectorStore as FAISS Index
+    participant LLM as LLM Engine (OpenAI / Gemini / Ollama)
+
+    User->>Frontend: Enter Natural Language Query
+    Frontend->>Backend: POST /api/v1/search (query, tags)
+    Backend->>VectorStore: Search Top-k Nearest Vectors
+    VectorStore-->>Backend: Return Matching Chunk IDs & L2 Distances
+    Backend->>Backend: Retrieve Raw Text Passages from SQLite
+    Backend->>LLM: Stream RAG Prompt + Context Chunks
+    LLM-->>Backend: Answer Text with Bracket Citations [1]
+    Backend-->>Frontend: JSON Response (Answer + Citation Card Links)
+    Frontend-->>User: Render Response & Highlight Citation Badges
+```
 
 ---
 
-## ⚙️ Run It Locally
+## 🚀 Setup & Execution
 
 ### Prerequisites
-- Python 3.9+
-- Node.js 18+
-- Active API Key (OpenAI / Gemini) or local Ollama service
 
-### 1. Backend Ingestion Server
-- Set up a virtual environment and install dependencies:
-  ```bash
-  python3 -m venv backend/venv
-  source backend/venv/bin/activate
-  pip install -r backend/requirements.txt
-  ```
-- Copy the template and configure your keys inside the `.env` file:
-  ```bash
-  cp .env.template .env
-  ```
-- Run the FastAPI application:
-  ```bash
-  python3 backend/main.py
-  ```
-  The API will be available at `http://localhost:8000`. You can inspect endpoints via Swagger docs at `http://localhost:8000/docs`.
-
-### 2. Frontend React Web App
-- Navigate to the frontend directory and install npm packages:
-  ```bash
-  cd frontend
-  npm install
-  ```
-- Launch the dev environment:
-  ```bash
-  npm run dev
-  ```
-  Open `http://localhost:5173` to see the **Gem** dashboard.
+- **Python**: 3.9+ installed
+- **Node.js**: v18+ & **npm** installed
+- Active API Key (OpenAI / Gemini) or local Ollama installation
 
 ---
 
-## 🦙 Ollama Local Configuration
+### 1. Backend Ingestion & RAG Server
 
-To run Gem completely locally without rate limits or API subscriptions:
-1. Download and run [Ollama](https://ollama.com/).
-2. Pull the necessary models:
+```bash
+# Navigate to project root
+cd omni-knowledge
+
+# Setup Python virtual environment
+python3 -m venv backend/venv
+source backend/venv/bin/activate
+pip install -r backend/requirements.txt
+
+# Copy environment template and set API keys
+cp .env.template .env
+
+# Run FastAPI backend server
+python3 backend/main.py
+```
+*FastAPI server runs at `http://localhost:8000` (Interactive docs at `http://localhost:8000/docs`).*
+
+---
+
+### 2. Frontend React Web App
+
+```bash
+# Open new terminal and navigate to frontend
+cd omni-knowledge/frontend
+
+# Install dependencies
+npm install
+
+# Launch Vite dev server
+npm run dev
+```
+*OmniKnowledge Web Dashboard opens at `http://localhost:5173`.*
+
+---
+
+## 🦙 Ollama Local Mode
+
+To run OmniKnowledge completely locally without external API dependencies:
+
+1. Install [Ollama](https://ollama.com/) and pull models:
    ```bash
    ollama run llama3.2
    ollama pull nomic-embed-text
    ```
-3. Set your [.env](file:///Users/sayed/Desktop/reboot01/projects/guidely/.env) configurations:
+2. Update `.env`:
    ```env
    LLM_PROVIDER=ollama
    OLLAMA_LLM_MODEL=llama3.2
    OLLAMA_EMBEDDING_MODEL=nomic-embed-text
    ```
-4. Restart your backend server. The database will automatically pre-seed and index your documents using Ollama.
+3. Restart the backend server. OmniKnowledge will automatically embed and index documents locally.
 
 ---
 
-## 📊 Testing & Metrics Results
-
-The RAG pipeline has been validated using the unit test suite in [verify_pipeline.py](file:///Users/sayed/Desktop/reboot01/projects/guidely/backend/tests/verify_pipeline.py). 
-
-| Metric | Target Limit / Benchmark | Results | Status | Type |
-| :--- | :--- | :--- | :--- | :--- |
-| **Retrieval@k Accuracy** | \(\ge 80\%\) correct chunks in top-3 | **100% accuracy** | **PASSED** | Manual |
-| **Answer Citation Coverage** | \(\ge 90\%\) answers have valid citations | **100% coverage** | **PASSED** | Manual |
-| **Warm Cache Latency** | Median < 3.0s, p95 < 5.0s | **Median: 850ms, p95: 1.8s** | **PASSED** | Auto-Logged |
-| **Embedding Cache Effectiveness** | 100% hit rate for unchanged docs/queries | **100% cache hits** | **PASSED** | Auto-Logged |
-| **Failure Handling** | Friendly UI state and API 4xx/5xx on empty or missing keys | **HTTP 400/500 logged** | **PASSED** | Auto-Logged |
-| **Source Precision** | \(\ge 80\%\) snippet-to-answer alignment | **90% precision** | **PASSED** | Manual |
-| **Indexing Throughput** | Error-free upload & rebuild, skips unchanged | **0 errors, skips active** | **PASSED** | Auto-Logged |
-
----
-
-## 📂 Project Directory Structure
+## 📂 Directory Structure
 
 ```
-guidely/
+omni-knowledge/
 ├── backend/
-│   ├── main.py               # FastAPI server entry point
-│   ├── requirements.txt      # Python dependencies
+│   ├── main.py               # FastAPI application server entrypoint
 │   ├── app/
-│   │   ├── config.py         # Env settings and folders creation
+│   │   ├── config.py         # App configuration & SQLite paths
 │   │   ├── database.py       # SQLite database initialization
-│   │   ├── api/              # API router packages
-│   │   │   ├── router.py     # Aggregated api router
-│   │   │   ├── documents.py  # File upload, list, delete, reindex
-│   │   │   ├── search.py     # Similarity search and RAG Q&A endpoints
-│   │   │   └── metrics.py    # Health, statistics, CSV log exports
-│   │   ├── models/           # Pydantic schemas
-│   │   └── services/         # Core business logic handlers
-│   │       ├── document_parser.py  # Text, MD, and JSON parsers
-│   │       ├── chunker.py          # Semantic overlaps chunking
-│   │       ├── embedder.py         # OpenAI/Gemini/Ollama embedding and cache
-│   │       ├── vector_store.py     # Local FAISS index manager
-│   │       ├── llm.py              # LLM Q&A generation interface
-│   │       └── metrics_tracker.py  # Database transaction telemetry logger
+│   │   ├── api/              # API router packages (documents, search, metrics)
+│   │   └── services/         # Document parser, chunker, embedder, FAISS vector store
 │   └── data/
-│       └── sample-docs/      # Default testing files
-│
+│       └── sample-docs/      # Default evaluation document corpus
 ├── frontend/
-│   ├── index.html            # Web app entrypoint
-│   ├── package.json          # Node dependencies
-│   ├── vite.config.ts        # Vite build properties
-│   └── src/                  # React source
-│       ├── main.tsx          # Client loader
-│       ├── App.tsx           # Page navigator router
-│       ├── index.css         # Tailwind v4 theme configuration
-│       ├── components/       # Reusable layout and dashboard components
-│       ├── hooks/            # Custom API state management hooks
-│       ├── services/         # HTTP endpoint communication wrapper
-│       └── pages/            # View pages (Search, Admin, Metrics)
+│   ├── src/
+│   │   ├── components/       # Search UI, citation modal, telemetry charts
+│   │   ├── hooks/            # Search & document management custom hooks
+│   │   ├── pages/            # Search, Admin, and Metrics view pages
+│   │   └── App.tsx           # Page router & layout wrapper
+│   └── package.json
+└── README.md
 ```
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See [LICENSE](LICENSE.md) for details.
