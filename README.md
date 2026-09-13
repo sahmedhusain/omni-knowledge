@@ -44,6 +44,12 @@
 
 ---
 
+## 🖼️ Interface Preview
+
+![OmniKnowledge Interface](frontend/src/assets/hero.png)
+
+---
+
 ## 🏗️ System Architecture
 
 ```mermaid
@@ -54,7 +60,8 @@ graph TD
     C -- Hit --> D[Retrieve Cached Vectors from SQLite]
     C -- Miss --> E[Generate Vectors via API / Ollama]
     
-    D & E --> F[Query FAISS FlatL2 Vector Matrix]
+    D --> F[Query FAISS FlatL2 Vector Matrix]
+    E --> F
     F --> G[Fetch Top-k Matching Chunks & Document Metadata]
     G --> H[Construct Context-Augmented RAG System Prompt]
     H --> I[Execute LLM Response Generation]
