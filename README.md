@@ -44,12 +44,6 @@
 
 ---
 
-## 🖼️ Interface Preview
-
-![OmniKnowledge Interface](frontend/src/assets/hero.png)
-
----
-
 ## 🏗️ System Architecture
 
 ```mermaid
